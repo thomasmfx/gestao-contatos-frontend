@@ -1,8 +1,8 @@
 import './Table.css';
 
-function Table({ data, columns }) {
+function Table({ data, columns, onRowClick, size = '' }) {
   return (
-    <table className="table">
+    <table className={`table ${size}`}>
       <thead className="thead">
         <tr className="tr">
           {columns.map((column, index) => (
@@ -14,7 +14,7 @@ function Table({ data, columns }) {
       </thead>
       <tbody className="tbody">
         {data?.map((row) => (
-          <tr className="tr" key={row.id}>
+          <tr onClick={() => onRowClick(row.id)} className="tr" key={row.id}>
             {Object.entries(row).map(([key, value]) => (
               <td className="td" key={key}>
                 {value}
