@@ -2,8 +2,10 @@ import './Root.css';
 
 import { useEffect, useState } from 'react';
 
+import AddContatoForm from '../components/AddContatoForm/AddContatoForm';
 import AddClienteForm from '../components/AddClienteForm/AddClienteForm';
 import { clienteColumns, contatoColumns } from '../utils/tableColumns';
+import ContatoForm from '../components/ContatoForm/ContatoForm';
 import ClienteForm from '../components/ClienteForm/ClienteForm';
 import SearchBar from '../components/SearchBar/Searchbar';
 import Button from '../components/Button/Button';
@@ -21,16 +23,30 @@ function Root() {
     updateCliente,
     deleteCliente,
   } = useClientes();
-  const { contatosData, setContatos, getContatos } = useContatos();
+
+  const {
+    contatosData,
+    setContatos,
+    getContatos,
+    getSingleContato,
+    addContato,
+    updateContato,
+    deleteContato,
+  } = useContatos();
+
   const [selectedCliente, setSelectedCliente] = useState(null);
   const [selectedClienteContatos, setSelectedClienteContatos] = useState(null);
   const [isAddingCliente, setIsAddingCliente] = useState(false);
+
+  const [selectedContato, setSelectedContato] = useState(null);
+  const [isAddingContato, setIsAddingContato] = useState(false);
 
   useEffect(() => {
     setClientes();
     setContatos();
   }, []);
 
+  // Funções para gerenciar clientes
   function handleSelectCliente(id) {
     getCliente(id).then((cliente) => {
       setSelectedCliente(cliente);
@@ -63,8 +79,37 @@ function Root() {
     });
   }
 
+  // Funções para gerenciar contatos
+  function handleSelectContato(id) {
+    getSingleContato(id).then((contato) => {
+      setSelectedContato(contato);
+    });
+  }
+
+  function handleAddContato(data) {
+    addContato(data).then(() => {
+      setIsAddingContato(false);
+      setContatos();
+    });
+  }
+
+  function handleUpdateContato(id, newData) {
+    updateContato(id, newData).then(() => {
+      setSelectedContato(null);
+      setContatos();
+    });
+  }
+
+  function handleDeleteContato(id) {
+    deleteContato(id).then(() => {
+      setSelectedContato(null);
+      setContatos();
+    });
+  }
+
   return (
     <>
+      {/* Formulários de Cliente */}
       {selectedCliente && selectedClienteContatos ? (
         <Modal onClose={() => setSelectedCliente(null)}>
           <ClienteForm
@@ -82,6 +127,27 @@ function Root() {
           <AddClienteForm
             onClose={() => setIsAddingCliente(false)}
             onSave={handleAddCliente}
+          />
+        </Modal>
+      )}
+
+      {/* Formulários de Contato */}
+      {selectedContato && (
+        <Modal onClose={() => setSelectedContato(null)}>
+          <ContatoForm
+            onClose={() => setSelectedContato(null)}
+            onDelete={handleDeleteContato}
+            onSave={handleUpdateContato}
+            contato={selectedContato}
+          />
+        </Modal>
+      )}
+
+      {isAddingContato && (
+        <Modal onClose={() => setIsAddingContato(false)}>
+          <AddContatoForm
+            onClose={() => setIsAddingContato(false)}
+            onSave={handleAddContato}
           />
         </Modal>
       )}
@@ -110,12 +176,16 @@ function Root() {
               placeholder="Buscar contato por ID Cliente"
               onSearch={setContatos}
             />
-            <Button variant="add">
+            <Button onClick={() => setIsAddingContato(true)} variant="add">
               <span>Novo contato</span>
             </Button>
           </header>
           <h2>Lista de contatos</h2>
-          <Table columns={contatoColumns} data={contatosData} />
+          <Table
+            onRowClick={handleSelectContato}
+            columns={contatoColumns}
+            data={contatosData}
+          />
         </section>
       </main>
     </>
