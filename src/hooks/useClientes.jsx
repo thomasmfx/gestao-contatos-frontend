@@ -7,14 +7,19 @@ function useClientes() {
   const [clientesLoading, setClientesLoading] = useState(false);
   const [clientesError, setClientesError] = useState(null);
 
-  async function getClientes(id = '') {
+  async function getClientes(id = '', search = null) {
     setClientesLoading(true);
     setClientesError(null);
 
     const baseUrl = API_URL;
 
     try {
-      const url = id ? `${baseUrl}/${id}` : baseUrl;
+      let url = baseUrl;
+
+      if (id !== '') url = id ? `${baseUrl}/${id}` : baseUrl;
+      else if (search !== null)
+        url = search ? `${baseUrl}${'?search=' + search}` : baseUrl;
+
       const response = await fetch(url);
 
       if (!response.ok) {

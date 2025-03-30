@@ -25,6 +25,7 @@ function Root() {
           <SearchBar
             placeholder="Buscar cliente por Nome ou CPF"
             inputName="buscar-cliente"
+            onSearch={getClientes}
           />
           <Button variant="add">
             <span>Novo cliente</span>
@@ -38,6 +39,7 @@ function Root() {
           <SearchBar
             placeholder="Buscar contato por ID Cliente"
             inputName="buscar-contato"
+            onSearch={getContatos}
           />
           <Button variant="add">
             <span>Novo contato</span>

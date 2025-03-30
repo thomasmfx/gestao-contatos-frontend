@@ -7,14 +7,19 @@ function useContatos() {
   const [contatosLoading, setContatosLoading] = useState(false);
   const [contatosError, setContatosError] = useState(null);
 
-  async function getContatos(id = '') {
+  async function getContatos(id = '', clienteId = null) {
     setContatosLoading(true);
     setContatosError(null);
 
     const baseUrl = API_URL;
 
     try {
-      const url = id ? `${baseUrl}/${id}` : baseUrl;
+      let url = baseUrl;
+
+      if (id !== '') url = id ? `${baseUrl}/${id}` : baseUrl;
+      else if (clienteId !== null)
+        url = clienteId ? `${baseUrl}${'?clienteid=' + clienteId}` : baseUrl;
+
       const response = await fetch(url);
 
       if (!response.ok) {
