@@ -1,9 +1,18 @@
 import './Input.css';
 
-function Input({ id, type = 'text', placeholder, value, inputName, onChange }) {
+function Input({
+  id,
+  type = 'text',
+  placeholder,
+  value,
+  inputName,
+  required,
+  onChange,
+}) {
   return (
     <input
       placeholder={placeholder}
+      required={required}
       onChange={onChange}
       autoComplete="off"
       className="input"
