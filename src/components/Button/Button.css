@@ -2,11 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px; /* Same height as input */
+  height: 35px;
   padding-inline: 0.5em;
   border: none;
   border-radius: 5px;
-  background-color: #4285f4;
+  background-color: var(--color-primary);
   color: #ffffff;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
@@ -16,7 +16,7 @@
 }
 
 .button:hover {
-  background-color: #3a7be5; /* 10% mais escuro */
+  background-color: var(--color-primary-hover);
 }
 
 .square {
@@ -25,29 +25,31 @@
   padding-inline: 0;
 }
 
-/* Verde (Adicionar) */
-.add {
-  background-color: #0f9d58; /* HSL(147, 88%, 33%) */
-  color: white;
+.transparent {
+  background: none;
 }
-.add:hover {
-  background-color: #0d864f; /* HSL(147, 88%, 23%) */
+.transparent:hover {
+  background: none;
 }
 
-/* Amarelo (Editar) */
+.add {
+  background-color: var(--color-add);
+}
+.add:hover {
+  background-color: var(--color-add-hover);
+}
+
 .edit {
-  background-color: #ffc107; /* HSL(45, 100%, 50%) */
+  background-color: var(--color-edit);
   color: black;
 }
 .edit:hover {
-  background-color: #e0ac05; /* HSL(45, 100%, 40%) */
+  background-color: var(--color-edit-hover);
 }
 
-/* Vermelho (Excluir) */
 .delete {
-  background-color: #f44336; /* HSL(4, 89%, 58%) */
-  color: white;
+  background-color: var(--color-delete);
 }
 .delete:hover {
-  background-color: #d13629; /* HSL(4, 89%, 48%) */
+  background-color: var(--color-delete-hover);
 }
