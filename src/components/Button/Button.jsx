@@ -2,7 +2,7 @@ import './Button.css';
 
 function Button({
   children,
-  type = '',
+  type = 'button',
   variant = '',
   isSquare = false,
   onClick,

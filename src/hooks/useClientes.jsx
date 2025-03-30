@@ -33,7 +33,7 @@ function useClientes() {
     }
   }
 
-  async function getCliente(id = '') {
+  async function getSingleCliente(id = '') {
     try {
       const url = id ? `${baseUrl}${'/' + id}` : baseUrl;
 
@@ -123,7 +123,7 @@ function useClientes() {
     clientesLoading,
     clientesError,
     setClientes,
-    getCliente,
+    getSingleCliente,
     addCliente,
     updateCliente,
     deleteCliente,
