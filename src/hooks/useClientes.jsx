@@ -7,18 +7,14 @@ function useClientes() {
   const [clientesLoading, setClientesLoading] = useState(false);
   const [clientesError, setClientesError] = useState(null);
 
-  async function getClientes(id = '', search = null) {
+  const baseUrl = API_URL;
+
+  async function setClientes(search = null) {
     setClientesLoading(true);
     setClientesError(null);
 
-    const baseUrl = API_URL;
-
     try {
-      let url = baseUrl;
-
-      if (id !== '') url = id ? `${baseUrl}/${id}` : baseUrl;
-      else if (search !== null)
-        url = search ? `${baseUrl}${'?search=' + search}` : baseUrl;
+      const url = search ? `${baseUrl}${'?search=' + search}` : baseUrl;
 
       const response = await fetch(url);
 
@@ -37,7 +33,30 @@ function useClientes() {
     }
   }
 
-  return { clientesData, clientesLoading, clientesError, getClientes };
+  async function getCliente(id = '') {
+    try {
+      const url = id ? `${baseUrl}${'/' + id}` : baseUrl;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch {
+      return null;
+    }
+  }
+
+  return {
+    clientesData,
+    clientesLoading,
+    clientesError,
+    setClientes,
+    getCliente,
+  };
 }
 
 export default useClientes;

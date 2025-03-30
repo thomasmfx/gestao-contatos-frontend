@@ -7,18 +7,16 @@ function useContatos() {
   const [contatosLoading, setContatosLoading] = useState(false);
   const [contatosError, setContatosError] = useState(null);
 
-  async function getContatos(id = '', clienteId = null) {
+  const baseUrl = API_URL;
+
+  async function setContatos(clienteId = null) {
     setContatosLoading(true);
     setContatosError(null);
 
-    const baseUrl = API_URL;
-
     try {
-      let url = baseUrl;
-
-      if (id !== '') url = id ? `${baseUrl}/${id}` : baseUrl;
-      else if (clienteId !== null)
-        url = clienteId ? `${baseUrl}${'?clienteid=' + clienteId}` : baseUrl;
+      const url = clienteId
+        ? `${baseUrl}${'?clienteid=' + clienteId}`
+        : baseUrl;
 
       const response = await fetch(url);
 
@@ -37,7 +35,32 @@ function useContatos() {
     }
   }
 
-  return { contatosData, contatosLoading, contatosError, getContatos };
+  async function getContatos(clienteId = null) {
+    try {
+      const url = clienteId
+        ? `${baseUrl}${'?clienteid=' + clienteId}`
+        : baseUrl;
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch {
+      return null;
+    }
+  }
+
+  return {
+    contatosData,
+    contatosLoading,
+    contatosError,
+    setContatos,
+    getContatos,
+  };
 }
 
 export default useContatos;
