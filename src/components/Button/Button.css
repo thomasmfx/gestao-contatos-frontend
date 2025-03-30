@@ -1,0 +1,53 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px; /* Same height as input */
+  padding-inline: 0.5em;
+  border: none;
+  border-radius: 5px;
+  background-color: #4285f4;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: #3a7be5; /* 10% mais escuro */
+}
+
+.square {
+  height: 35px;
+  min-width: 35px;
+  padding-inline: 0;
+}
+
+/* Verde (Adicionar) */
+.add {
+  background-color: #0f9d58; /* HSL(147, 88%, 33%) */
+  color: white;
+}
+.add:hover {
+  background-color: #0d864f; /* HSL(147, 88%, 23%) */
+}
+
+/* Amarelo (Editar) */
+.edit {
+  background-color: #ffc107; /* HSL(45, 100%, 50%) */
+  color: black;
+}
+.edit:hover {
+  background-color: #e0ac05; /* HSL(45, 100%, 40%) */
+}
+
+/* Vermelho (Excluir) */
+.delete {
+  background-color: #f44336; /* HSL(4, 89%, 58%) */
+  color: white;
+}
+.delete:hover {
+  background-color: #d13629; /* HSL(4, 89%, 48%) */
+}
