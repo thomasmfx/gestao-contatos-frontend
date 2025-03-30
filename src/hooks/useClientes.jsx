@@ -50,12 +50,83 @@ function useClientes() {
     }
   }
 
+  async function addCliente(data) {
+    try {
+      const url = baseUrl;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch {
+      return null;
+    }
+  }
+
+  async function updateCliente(id = '', newData) {
+    try {
+      const url = `${baseUrl}${'/' + id}`;
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(newData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch {
+      return null;
+    }
+  }
+
+  async function deleteCliente(id = '') {
+    try {
+      const url = `${baseUrl}${'/' + id}`;
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch {
+      return null;
+    }
+  }
+
   return {
     clientesData,
     clientesLoading,
     clientesError,
     setClientes,
     getCliente,
+    addCliente,
+    updateCliente,
+    deleteCliente,
   };
 }
 
