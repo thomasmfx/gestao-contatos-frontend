@@ -44,7 +44,34 @@ select {
 
 /* || Styles */
 
+:root {
+  --color-default: #343a40;
+
+  --color-primary: #4285f4;
+  --color-primary-hover: #3a7be5;
+
+  --color-add: #0f9d58;
+  --color-add-hover: #0d864f;
+
+  --color-edit: #ffc107;
+  --color-edit-hover: #e0ac05;
+
+  --color-delete: #f44336;
+  --color-delete-hover: #d13629;
+
+  --color-neutral: #e5e5e5;
+  --color-neutral-light: #ecf0f1;
+}
+
 #root {
   min-height: 100vh;
-  color: #343a40;
+  color: var(--color-default);
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+h4 {
+  font-size: 0.9rem;
 }
