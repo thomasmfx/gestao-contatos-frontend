@@ -3,26 +3,27 @@ import { useState } from 'react';
 
 import './SearchBar.css';
 import Button from '../Button/Button';
+import Input from '../Input/Input';
 
-function SearchBar({ placeholder = '', inputName = 'Input', onSearch }) {
-  const [inputValue, setInputValue] = useState('');
+function SearchBar({ placeholder = '', onSearch }) {
+  const [value, setValue] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSearch('', inputValue);
+    onSearch(value);
   }
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} className="searchbar-form">
-      <input
-        onChange={(e) => setInputValue(e.target.value)}
+      <Input
+        onChange={(e) => setValue(e.target.value)}
+        inputName={'Barra de pesquisa'}
         className="searchbar-input"
         placeholder={placeholder}
-        value={inputValue}
         autoComplete="off"
-        name={inputName}
+        value={value}
       />
-      <Button type={'submit'} isSquare>
+      <Button onClick={() => onSearch(value)} type={'submit'} isSquare>
         <Search />
       </Button>
     </form>
