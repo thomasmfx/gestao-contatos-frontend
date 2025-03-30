@@ -35,11 +35,9 @@ function useContatos() {
     }
   }
 
-  async function getContatos(clienteId = null) {
+  async function getContatos(clienteId) {
     try {
-      const url = clienteId
-        ? `${baseUrl}${'?clienteid=' + clienteId}`
-        : baseUrl;
+      const url = `${baseUrl}${'?clienteid=' + clienteId}`;
 
       const response = await fetch(url);
 
@@ -56,7 +54,7 @@ function useContatos() {
 
   async function getSingleContato(id) {
     try {
-      const url = id ? `${baseUrl}${'/' + id}` : baseUrl;
+      const url = `${baseUrl}/${id}`;
 
       const response = await fetch(url);
 
@@ -94,9 +92,9 @@ function useContatos() {
     }
   }
 
-  async function updateContato(id = '', newData) {
+  async function updateContato(id, newData) {
     try {
-      const url = `${baseUrl}${'/' + id}`;
+      const url = `${baseUrl}/${id}`;
 
       const response = await fetch(url, {
         method: 'PUT',
@@ -117,9 +115,9 @@ function useContatos() {
     }
   }
 
-  async function deleteContato(id = '') {
+  async function deleteContato(id) {
     try {
-      const url = `${baseUrl}${'/' + id}`;
+      const url = `${baseUrl}/${id}`;
 
       const response = await fetch(url, {
         method: 'DELETE',
