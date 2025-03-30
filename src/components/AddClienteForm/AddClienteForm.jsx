@@ -26,9 +26,9 @@ function AddClienteForm({ onSave, onClose }) {
           onSave(data);
         }}
         onClick={(e) => e.stopPropagation()}
-        className="cliente-form"
+        className="form"
       >
-        <header className="cliente-form-header">
+        <header className="form-header">
           <h3 className="form-heading">Novo Cliente</h3>
           <Button variant="transparent" onClick={onClose} isSquare>
             <X />
@@ -76,7 +76,7 @@ function AddClienteForm({ onSave, onClose }) {
             />
           </div>
         </div>
-        <div className="actions">
+        <div className="form-actions">
           <Button onClick={onClose} variant="delete">
             Cancelar
           </Button>

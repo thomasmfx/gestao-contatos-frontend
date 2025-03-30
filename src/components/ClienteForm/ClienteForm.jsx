@@ -5,7 +5,6 @@ import { contatoColumns } from '../../utils/tableColumns';
 import Button from '../Button/Button';
 import Table from '../Table/Table';
 import Label from '../Label/Label';
-import './ClienteForm.css';
 import Input from '../Input/Input';
 
 function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
@@ -23,9 +22,9 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
         onSave(data.id, data);
       }}
       onClick={(e) => e.stopPropagation()}
-      className="cliente-form"
+      className="form"
     >
-      <header className="cliente-form-header">
+      <header className="form-header">
         <h3 className="form-heading">Detalhes do Cliente</h3>
         <Button variant="transparent" onClick={onClose} isSquare>
           <X />
@@ -74,10 +73,10 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
         </div>
       </div>
       <div className="contatos-cliente">
-        <h4 className="contatos-heading">Contatos</h4>
+        <h4 className="contatos-cliente-heading">Contatos</h4>
         <Table columns={contatoColumns} data={contatos} size="small" />
       </div>
-      <div className="actions">
+      <div className="form-actions">
         <Button onClick={() => onDelete(data.id)} variant="delete">
           Excluir Cliente
         </Button>
