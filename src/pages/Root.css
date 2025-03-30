@@ -1,0 +1,19 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.section {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.header {
+  display: flex;
+  gap: 4em;
+  padding: 1.5em;
+  border-radius: 5px;
+  background-color: #ecf0f1;
+}
