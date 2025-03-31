@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { X } from 'react-feather';
 
+import tiposContato from '../../utils/tiposContato';
+import Select from '../Select/Select';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
@@ -47,8 +49,9 @@ function ContatoForm({ contato, onSave, onDelete, onClose }) {
           </div>
           <div className="form-field">
             <Label htmlFor="tipo">Tipo</Label>
-            <Input
+            <Select
               onChange={(e) => handleOnChange(e, 'tipo')}
+              options={tiposContato}
               value={data.tipo}
               id="tipo"
               required
