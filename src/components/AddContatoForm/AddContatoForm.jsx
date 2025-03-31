@@ -82,7 +82,7 @@ function AddContatoForm({ onSave, onClose }) {
             Cancelar
           </Button>
           <Button variant="add" type="submit">
-            Adicionar Contato
+            Salvar
           </Button>
         </div>
       </form>

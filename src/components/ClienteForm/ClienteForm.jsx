@@ -77,11 +77,11 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
         <Table columns={contatoColumns} data={contatos} size="small" />
       </div>
       <div className="form-actions">
-        <Button onClick={() => onDelete(data.id)} variant="delete">
-          Excluir Cliente
+        <Button onClick={() => onDelete(data.id)} variant="delete small">
+          Excluir
         </Button>
-        <Button variant="add" type="submit">
-          Salvar Alterações
+        <Button variant="add small" type="submit">
+          Salvar
         </Button>
       </div>
     </form>

@@ -79,13 +79,13 @@ function ContatoForm({ contato, onSave, onDelete, onClose }) {
         <div className="form-actions">
           <Button
             onClick={() => onDelete(data.id)}
-            variant="delete"
+            variant="delete small"
             type="button"
           >
-            Excluir Contato
+            Excluir
           </Button>
-          <Button variant="add" type="submit">
-            Salvar Alterações
+          <Button variant="add small" type="submit">
+            Salvar
           </Button>
         </div>
       </form>

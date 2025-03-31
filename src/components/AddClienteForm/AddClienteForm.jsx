@@ -81,7 +81,7 @@ function AddClienteForm({ onSave, onClose }) {
             Cancelar
           </Button>
           <Button variant="add" type="submit">
-            Salvar Cliente
+            Salvar
           </Button>
         </div>
       </form>

@@ -13,6 +13,10 @@
   white-space: nowrap;
   font-size: 0.9rem;
   font-weight: 600;
+
+  &:not(.square):not(.small) {
+    width: 115px;
+  }
 }
 
 .button:hover {
@@ -23,6 +27,10 @@
   height: 35px;
   min-width: 35px;
   padding-inline: 0;
+}
+
+.small {
+  width: 90px;
 }
 
 .transparent {

@@ -163,7 +163,7 @@ function Root() {
               <span>Novo cliente</span>
             </Button>
           </header>
-          <h2>Lista de clientes</h2>
+          <h2>Clientes</h2>
           <Table
             onRowClick={handleSelectCliente}
             columns={clienteColumns}
@@ -180,7 +180,7 @@ function Root() {
               <span>Novo contato</span>
             </Button>
           </header>
-          <h2>Lista de contatos</h2>
+          <h2>Contatos</h2>
           <Table
             onRowClick={handleSelectContato}
             columns={contatoColumns}
