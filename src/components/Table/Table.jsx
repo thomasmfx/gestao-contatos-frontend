@@ -1,3 +1,4 @@
+import { formatarDocumento, formatarData } from '../../utils/formatData';
 import './Table.css';
 
 function Table({ data, columns, onRowClick, size = '' }) {
@@ -17,7 +18,11 @@ function Table({ data, columns, onRowClick, size = '' }) {
           <tr onClick={() => onRowClick(row.id)} className="tr" key={row.id}>
             {Object.entries(row).map(([key, value]) => (
               <td className="td" key={key}>
-                {value}
+                {key === 'cpf'
+                  ? formatarDocumento(value)
+                  : key === 'dataNascimento'
+                    ? formatarData(value)
+                    : value}
               </td>
             ))}
           </tr>
