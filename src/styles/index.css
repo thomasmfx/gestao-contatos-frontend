@@ -63,12 +63,14 @@ select {
 
   --color-neutral: #e5e5e5;
   --color-neutral-light: #ecf0f1;
+
+  --font: Inter, sans-serif;
 }
 
 #root {
   min-height: 100vh;
   color: var(--color-default);
-  font-family: Inter;
+  font-family: var(--font);
 }
 
 h3 {
