@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-import API_URL from '../utils/API';
-
 function useClientes() {
   const [clientesData, setClientesData] = useState(null);
   const [clientesLoading, setClientesLoading] = useState(false);
   const [clientesError, setClientesError] = useState(null);
 
-  const baseUrl = API_URL + 'clientes';
+  const baseUrl = '/clientes';
 
   async function setClientes(search = null) {
     setClientesLoading(true);

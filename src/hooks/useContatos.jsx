@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-import API_URL from '../utils/API';
-
 function useContatos() {
   const [contatosData, setContatosData] = useState(null);
   const [contatosLoading, setContatosLoading] = useState(false);
   const [contatosError, setContatosError] = useState(null);
 
-  const baseUrl = API_URL + 'contatos';
+  const baseUrl = '/contatos';
 
   async function setContatos(clienteId = null) {
     setContatosLoading(true);
