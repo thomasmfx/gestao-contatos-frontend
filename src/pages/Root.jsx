@@ -64,7 +64,7 @@ function Root() {
   }
 
   function handleUpdateCliente(id, newData) {
-    updateCliente(id, newData).then(() => {
+    updateCliente(newData, id).then(() => {
       setSelectedCliente(null);
       setClientes();
       setContatos();

@@ -16,15 +16,18 @@ function Table({ data, columns, onRowClick, size = '' }) {
       <tbody className="tbody">
         {data?.map((row) => (
           <tr onClick={() => onRowClick(row.id)} className="tr" key={row.id}>
-            {Object.entries(row).map(([key, value]) => (
-              <td className="td" key={key}>
-                {key === 'cpf'
-                  ? formatarDocumento(value)
-                  : key === 'dataNascimento'
-                    ? formatarData(value)
-                    : value}
-              </td>
-            ))}
+            {Object.entries(row).map(
+              ([key, value]) =>
+                key != 'endereco' && (
+                  <td className="td" key={key}>
+                    {key === 'cpf'
+                      ? formatarDocumento(value)
+                      : key === 'dataNascimento'
+                        ? formatarData(value)
+                        : value}
+                  </td>
+                ),
+            )}
           </tr>
         ))}
       </tbody>
