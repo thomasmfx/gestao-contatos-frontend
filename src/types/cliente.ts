@@ -3,6 +3,7 @@ export interface Endereco {
   rua: string;
   numero?: string;
   cidade?: string;
+  estado?: string;
   cep?: string;
   clienteId: number;
 } 
@@ -12,13 +13,13 @@ export interface Cliente {
   nome: string;
   cpf: string;
   dataNascimento: string;
-  endereco?: Endereco
+  endereco: Endereco
 }
 
 type EnderecoPayload = Omit<Endereco, "id" | "clienteId">;
 
 export type ClientePayload = Omit<Cliente, "id" | "endereco"> & {
-  endereco?: EnderecoPayload
+  endereco: EnderecoPayload
 };
 
 export type ClienteUpdatePayload = Partial<ClientePayload>

@@ -1,20 +1,39 @@
 import { X } from 'react-feather';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
+import { ClientePayload } from '../../types/cliente';
+import FormRowLegend from '../FormRowLegend/FormRowLegend';
 
-function AddClienteForm({ onSave, onClose }) {
-  const [data, setData] = useState({
-    nome: '',
-    cpf: '',
-    dataNascimento: '',
-    endereco: '',
-  });
+type AddClienteFormProps = {
+  onSave: (data: ClientePayload) => void;
+  onClose: () => void;
+}
 
-  function handleOnChange(e, key) {
+const clienteInitialData: ClientePayload = {
+  nome: '',
+  cpf: '',
+  dataNascimento: '',
+  endereco: {
+    rua: '',
+    numero: '',
+    cidade: '',
+    estado: '',
+    cep: '',
+  },
+};
+
+function AddClienteForm({ onSave, onClose }: Readonly<AddClienteFormProps>) {
+  const [data, setData] = useState<ClientePayload>({...clienteInitialData});
+
+  function handleOnChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: string) {
     const newValue = e.target.value;
+    if (key.includes('endereco')) {
+      setData({...data, endereco: {...data.endereco, [key.split('.')[1].toString()]: newValue}});
+      return;
+    }
     setData({ ...data, [key]: newValue });
   }
 
@@ -34,6 +53,7 @@ function AddClienteForm({ onSave, onClose }) {
             <X />
           </Button>
         </header>
+        <FormRowLegend>Dados Pessoais</FormRowLegend>
         <div className="form-row">
           <div className="form-field">
             <Label htmlFor="nome">Nome</Label>
@@ -66,12 +86,21 @@ function AddClienteForm({ onSave, onClose }) {
             />
           </div>
         </div>
+        <FormRowLegend>Informações de endereço</FormRowLegend>
         <div className="form-row">
           <div className="form-field">
-            <Label htmlFor="endereco">Endereço</Label>
+            <Label htmlFor="endereco">Rua</Label>
             <Input
-              onChange={(e) => handleOnChange(e, 'endereco')}
-              value={data.endereco}
+              onChange={(e) => handleOnChange(e, 'endereco.rua')}
+              value={data.endereco.rua}
+              id="endereco"
+            />
+          </div>
+          <div className="form-field">
+            <Label htmlFor="endereco">Numero</Label>
+            <Input
+              onChange={(e) => handleOnChange(e, 'endereco.numero')}
+              value={data.endereco.numero!}
               id="endereco"
             />
           </div>

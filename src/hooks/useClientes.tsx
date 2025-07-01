@@ -2,16 +2,17 @@ import { useState } from 'react';
 import { isError } from '../utils/isError';
 import { Cliente, ClientePayload, ClienteUpdatePayload } from '../types/cliente';
 import API_URL from '../utils/API';
+import { ID } from '../types/id';
 
 interface UseClientsResult {
   clientesData: Cliente[] | [];
   clientesLoading: boolean;
   clientesError: string | null;
-  setClientes: (search?: string | null) => Promise<Cliente[] | null>;
-  getSingleCliente: (id: string) => Promise<Cliente | null>;
+  setClientes: (search?: string | number | null) => Promise<Cliente[] | null>;
+  getSingleCliente: (id: ID) => Promise<Cliente | null>;
   addCliente: (data: ClientePayload) => Promise<Cliente>;
-  updateCliente: (newData: ClienteUpdatePayload, id: string) => Promise<Cliente | null>;
-  deleteCliente: (id: string) => Promise<boolean>;
+  updateCliente: (newData: ClienteUpdatePayload, id: ID) => Promise<Cliente | null>;
+  deleteCliente: (id: ID) => Promise<boolean>;
 }
 
 function useClientes(): UseClientsResult {
@@ -21,7 +22,7 @@ function useClientes(): UseClientsResult {
 
   const baseUrl= `${API_URL}/clientes`;
 
-  async function setClientes(search?: string | null): Promise<Cliente[] | null> {
+  async function setClientes(search?: string | number | null): Promise<Cliente[] | null> {
     setClientesLoading(true);
     setClientesError(null);
 
@@ -50,16 +51,9 @@ function useClientes(): UseClientsResult {
     }
   }
 
-  async function getSingleCliente(id: string): Promise<Cliente | null> {
-    const trimmedId = id.trim()
-
-    if (!trimmedId) {
-      console.error("O ID é obrigatório e não pode ser vazio ou falso");
-      return null;
-    }
-
+  async function getSingleCliente(id: ID): Promise<Cliente | null> {
     try {
-      const url = `${baseUrl}/${trimmedId}`;
+      const url = `${baseUrl}/${id}`;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -91,23 +85,17 @@ function useClientes(): UseClientsResult {
       });
 
       if (!response.ok) {
-        throw new Error(`Erro: ${response.status}`);
+        console.log(response.status, response.statusText);
+        throw new Error(`Erro: ${response.status} e ${response.statusText}`);
       }
 
       const result: Cliente = await response.json();
       return result;
   }
 
-  async function updateCliente(newData: ClienteUpdatePayload, id: string): Promise<Cliente | null> {
-    const trimmedId = id.trim()
-
-    if (!trimmedId) {
-      console.error("O ID é obrigatório e não pode ser vazio ou falso");
-      return null;
-    }
-
+  async function updateCliente(newData: ClienteUpdatePayload, id: ID): Promise<Cliente | null> {
     try {
-      const url = `${baseUrl}/${trimmedId}`;
+      const url = `${baseUrl}/${id}`;
 
       const response = await fetch(url, {
         method: 'PUT',
@@ -134,16 +122,9 @@ function useClientes(): UseClientsResult {
     }
   }
 
-  async function deleteCliente(id: string): Promise<boolean> {
-    const trimmedId = id.trim()
-
-    if (!trimmedId) {
-      console.error("O ID é obrigatório e não pode ser vazio ou falso");
-      return false;
-    }
-
+  async function deleteCliente(id: ID): Promise<boolean> {
     try {
-      const url = `${baseUrl}/${trimmedId}`;
+      const url = `${baseUrl}/${id}`;
       const response = await fetch(url, { method: 'DELETE' });
 
       if (!response.ok) {

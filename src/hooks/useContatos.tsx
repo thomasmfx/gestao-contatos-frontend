@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { isError } from '../utils/isError';
 import { Contato, ContatoPayload, ContatoUpdatePayload } from '../types/contato'
 import API_URL from '../utils/API';
+import { ID } from '../types/id';
 
 interface UseContatosResult {
   contatosData: Contato[] | [];
   contatosLoading: boolean;
   contatosError: string | null;
-  setContatos: (clienteId?: number) => Promise<Contato[] | null>;
-  getContatos: (clienteId: number) => Promise<Contato[] | null>;
-  getSingleContato: (id: number) => Promise<Contato | null>;
+  setContatos: (clienteId?: ID) => Promise<Contato[] | null>;
+  getContatos: (clienteId: ID) => Promise<Contato[] | null>;
+  getSingleContato: (id: ID) => Promise<Contato | null>;
   addContato: (data: ContatoPayload) => Promise<Contato>;
-  updateContato: (id: number, newData: ContatoUpdatePayload) => Promise<Contato | null>;
-  deleteContato: (id: number) => Promise<boolean>;
+  updateContato: (id: ID, newData: ContatoUpdatePayload) => Promise<Contato | null>;
+  deleteContato: (id: ID) => Promise<boolean>;
 }
 
 function useContatos(): UseContatosResult {
@@ -22,7 +23,7 @@ function useContatos(): UseContatosResult {
 
   const baseUrl = `${API_URL}/contatos`;
 
-  async function setContatos(clienteId?: number): Promise<Contato[] | null> {
+  async function setContatos(clienteId?: ID): Promise<Contato[] | null> {
     setContatosLoading(true);
     setContatosError(null);
 
@@ -51,7 +52,7 @@ function useContatos(): UseContatosResult {
     }
   }
 
-  async function getContatos(clienteId?: number): Promise<Contato[] | null> {
+  async function getContatos(clienteId?: ID): Promise<Contato[] | null> {
     try {
       const url = `${baseUrl}?clienteid=${clienteId}`;
 
@@ -74,7 +75,7 @@ function useContatos(): UseContatosResult {
     }
   }
 
-  async function getSingleContato(id: number): Promise<Contato | null> {
+  async function getSingleContato(id: ID): Promise<Contato | null> {
     try {
       const url = `${baseUrl}/${id}`;
 
@@ -117,7 +118,7 @@ function useContatos(): UseContatosResult {
 
   }
 
-  async function updateContato(id: number, newData: ContatoUpdatePayload): Promise<Contato | null> {
+  async function updateContato(id: ID, newData: ContatoUpdatePayload): Promise<Contato | null> {
     try {
       const url = `${baseUrl}/${id}`;
 
@@ -146,7 +147,7 @@ function useContatos(): UseContatosResult {
     }
   }
 
-  async function deleteContato(id: number): Promise<boolean> {
+  async function deleteContato(id: ID): Promise<boolean> {
     try {
       const url = `${baseUrl}/${id}`;
 

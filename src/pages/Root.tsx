@@ -4,15 +4,17 @@ import { useEffect, useState } from 'react';
 
 import AddContatoForm from '../components/AddContatoForm/AddContatoForm';
 import AddClienteForm from '../components/AddClienteForm/AddClienteForm';
-import { clienteColumns, contatoColumns } from '../utils/tableColumns';
-import ContatoForm from '../components/ContatoForm/ContatoForm';
-import ClienteForm from '../components/ClienteForm/ClienteForm';
+import UpdateContatoForm from '../components/UpdateContatoForm/UpdateContatoForm';
+import UpdateClienteForm from '../components/UpdateClienteForm/UpdateClienteForm';
 import SearchBar from '../components/SearchBar/Searchbar';
 import Button from '../components/Button/Button';
 import useContatos from '../hooks/useContatos';
 import useClientes from '../hooks/useClientes';
 import Table from '../components/Table/Table';
 import Modal from '../components/Modal/Modal';
+import { Cliente, ClientePayload, ClienteUpdatePayload } from '../types/cliente';
+import { Contato, ContatoPayload, ContatoUpdatePayload } from '../types/contato';
+import { ID } from '../types/id';
 
 function Root() {
   const {
@@ -34,12 +36,12 @@ function Root() {
     deleteContato,
   } = useContatos();
 
-  const [selectedCliente, setSelectedCliente] = useState(null);
-  const [selectedClienteContatos, setSelectedClienteContatos] = useState(null);
-  const [isAddingCliente, setIsAddingCliente] = useState(false);
+  const [selectedCliente, setSelectedCliente] = useState<Cliente | null>(null);
+  const [selectedClienteContatos, setSelectedClienteContatos] = useState<Contato[] | null>(null);
+  const [isAddingCliente, setIsAddingCliente] = useState<boolean>(false);
 
-  const [selectedContato, setSelectedContato] = useState(null);
-  const [isAddingContato, setIsAddingContato] = useState(false);
+  const [selectedContato, setSelectedContato] = useState<Contato | null>(null);
+  const [isAddingContato, setIsAddingContato] = useState<boolean>(false);
 
   useEffect(() => {
     setClientes();
@@ -47,7 +49,7 @@ function Root() {
   }, []);
 
   // Funções para gerenciar clientes
-  function handleSelectCliente(id) {
+  function handleSelectCliente(id: ID | string) {
     getSingleCliente(id).then((cliente) => {
       setSelectedCliente(cliente);
     });
@@ -56,14 +58,14 @@ function Root() {
     });
   }
 
-  function handleAddCliente(data) {
+  function handleAddCliente(data: ClientePayload) {
     addCliente(data).then(() => {
       setIsAddingCliente(false);
       setClientes();
     });
   }
 
-  function handleUpdateCliente(id, newData) {
+  function handleUpdateCliente(id: ID, newData: ClienteUpdatePayload) {
     updateCliente(newData, id).then(() => {
       setSelectedCliente(null);
       setClientes();
@@ -71,7 +73,7 @@ function Root() {
     });
   }
 
-  function handleDeleteCliente(id) {
+  function handleDeleteCliente(id: ID) {
     deleteCliente(id).then(() => {
       setSelectedCliente(null);
       setClientes();
@@ -80,27 +82,27 @@ function Root() {
   }
 
   // Funções para gerenciar contatos
-  function handleSelectContato(id) {
+  function handleSelectContato(id: ID) {
     getSingleContato(id).then((contato) => {
       setSelectedContato(contato);
     });
   }
 
-  function handleAddContato(data) {
+  function handleAddContato(data: ContatoPayload) {
     addContato(data).then(() => {
       setIsAddingContato(false);
       setContatos();
     });
   }
 
-  function handleUpdateContato(id, newData) {
+  function handleUpdateContato(id: ID, newData: ContatoUpdatePayload) {
     updateContato(id, newData).then(() => {
       setSelectedContato(null);
       setContatos();
     });
   }
 
-  function handleDeleteContato(id) {
+  function handleDeleteContato(id: ID) {
     deleteContato(id).then(() => {
       setSelectedContato(null);
       setContatos();
@@ -112,7 +114,7 @@ function Root() {
       {/* Formulários de Cliente */}
       {selectedCliente && selectedClienteContatos ? (
         <Modal onClose={() => setSelectedCliente(null)}>
-          <ClienteForm
+          <UpdateClienteForm
             onClose={() => setSelectedCliente(null)}
             contatos={selectedClienteContatos}
             onDelete={handleDeleteCliente}
@@ -134,7 +136,7 @@ function Root() {
       {/* Formulários de Contato */}
       {selectedContato && (
         <Modal onClose={() => setSelectedContato(null)}>
-          <ContatoForm
+          <UpdateContatoForm
             onClose={() => setSelectedContato(null)}
             onDelete={handleDeleteContato}
             onSave={handleUpdateContato}
@@ -165,8 +167,8 @@ function Root() {
           </header>
           <h2>Clientes</h2>
           <Table
+            tableType='cliente'
             onRowClick={handleSelectCliente}
-            columns={clienteColumns}
             data={clientesData}
           />
         </section>
@@ -182,8 +184,8 @@ function Root() {
           </header>
           <h2>Contatos</h2>
           <Table
+            tableType='contato'
             onRowClick={handleSelectContato}
-            columns={contatoColumns}
             data={contatosData}
           />
         </section>

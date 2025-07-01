@@ -1,39 +1,45 @@
+import { useState, useEffect, ChangeEvent } from 'react';
 import { X } from 'react-feather';
-import { useState } from 'react';
 
 import tiposContato from '../../utils/tiposContato';
 import Select from '../Select/Select';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
+import { Contato, ContatoPayload } from '../../types/contato';
+import { ID } from '../../types/id';
 
-function AddContatoForm({ onSave, onClose }) {
-  const [data, setData] = useState({
-    tipo: '',
-    clienteId: '',
-    valor: '',
-    observacao: '',
-  });
+type UpdateContatoFormProps = {
+  contato: Contato;
+  onSave: (id: ID, data: ContatoPayload) => void;
+  onDelete: (id: ID) => void;
+  onClose: () => void;
+}
 
-  function handleOnChange(e, key) {
+function UpdateContatoForm({ contato, onSave, onDelete, onClose }: Readonly<UpdateContatoFormProps> ) {
+  const [data, setData] = useState<Contato>({ ...contato });
+
+  useEffect(() => {
+    if (contato) setData({ ...contato });
+  }, [contato]);
+
+  function handleOnChange(e: ChangeEvent<HTMLSelectElement | HTMLInputElement>, key: string) {
     const newValue = e.target.value;
     setData({ ...data, [key]: newValue });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSave(data);
   }
 
   return (
     <div className="modal-container" onClick={onClose}>
       <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSave(data.id, data);
+        }}
         onClick={(e) => e.stopPropagation()}
-        onSubmit={handleSubmit}
         className="form"
       >
         <header className="form-header">
-          <h3 className="form-heading">Novo Contato</h3>
+          <h3 className="form-heading">Detalhes do Contato</h3>
           <Button variant="transparent" onClick={onClose} isSquare>
             <X />
           </Button>
@@ -43,7 +49,7 @@ function AddContatoForm({ onSave, onClose }) {
             <Label htmlFor="clienteId">ID Cliente</Label>
             <Input
               onChange={(e) => handleOnChange(e, 'clienteId')}
-              value={data.clienteId}
+              value={data.clienteId as string}
               id="clienteId"
               required
             />
@@ -52,7 +58,7 @@ function AddContatoForm({ onSave, onClose }) {
             <Label htmlFor="tipo">Tipo</Label>
             <Select
               onChange={(e) => handleOnChange(e, 'tipo')}
-              options={tiposContato}
+              options={[...tiposContato]}
               value={data.tipo}
               id="tipo"
               required
@@ -81,10 +87,14 @@ function AddContatoForm({ onSave, onClose }) {
           </div>
         </div>
         <div className="form-actions">
-          <Button onClick={onClose} variant="delete">
-            Cancelar
+          <Button
+            onClick={() => onDelete(data.id)}
+            variant="delete small"
+            type="button"
+          >
+            Excluir
           </Button>
-          <Button variant="add" type="submit">
+          <Button variant="add small" type="submit">
             Salvar
           </Button>
         </div>
@@ -93,4 +103,4 @@ function AddContatoForm({ onSave, onClose }) {
   );
 }
 
-export default AddContatoForm;
+export default UpdateContatoForm;

@@ -132,3 +132,11 @@ h4 {
   display: flex;
   gap: 1em;
 }
+
+.form-field-legend {
+  display: flex;
+  flex-basis: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-inline: 0.9em;
+}

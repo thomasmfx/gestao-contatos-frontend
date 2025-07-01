@@ -1,4 +1,16 @@
+import type { ChangeEventHandler } from 'react';
 import './Input.css';
+
+type InputProps = {
+  id?: string;
+  type?: string;
+  placeholder?: string;
+  value: string;
+  inputName?: string;
+  required?: boolean;
+  className?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>
+}
 
 function Input({
   id,
@@ -8,7 +20,7 @@ function Input({
   inputName,
   required,
   onChange,
-}) {
+}: Readonly<InputProps> ) {
   return (
     <input
       placeholder={placeholder}

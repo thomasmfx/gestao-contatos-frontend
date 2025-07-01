@@ -1,17 +1,32 @@
 import { X } from 'react-feather';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-import { contatoColumns } from '../../utils/tableColumns';
 import Button from '../Button/Button';
 import Table from '../Table/Table';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
+import FormRowLegend from '../FormRowLegend/FormRowLegend';
+import { Cliente, ClienteUpdatePayload } from '../../types/cliente';
+import { Contato } from '../../types/contato';
+import { ID } from '../../types/id';
 
-function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
-  const [data, setData] = useState({ ...cliente });
+type UpdateClienteFormProps = {
+  cliente: Cliente;
+  contatos: Contato[];
+  onSave: (id: ID, data: ClienteUpdatePayload) => void;
+  onDelete: (id: ID) => void;
+  onClose: () => void;
+}
 
-  function handleOnChange(e, key) {
+function UpdateClienteForm({ cliente, contatos, onSave, onDelete, onClose }: Readonly<UpdateClienteFormProps>) {
+  const [data, setData] = useState<Cliente>({ ...cliente });
+
+  function handleOnChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: string) {
     const newValue = e.target.value;
+    if (key.includes('endereco')) {
+      setData({...data, endereco: {...data.endereco, [key.split('.')[1].toString()]: newValue}});
+      return;
+    }
     setData({ ...data, [key]: newValue });
   }
 
@@ -30,6 +45,7 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
           <X />
         </Button>
       </header>
+      <FormRowLegend>Dados Pessoais</FormRowLegend>
       <div className="form-row">
         <div className="form-field">
           <Label htmlFor="nome">Nome</Label>
@@ -62,19 +78,28 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
           />
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-field">
-          <Label htmlFor="endereco">Endereço</Label>
-          <Input
-            onChange={(e) => handleOnChange(e, 'endereco')}
-            value={data.endereco}
-            id="endereco"
-          />
+        <FormRowLegend>Informações de endereço</FormRowLegend>
+        <div className="form-row">
+          <div className="form-field">
+            <Label htmlFor="endereco">Rua</Label>
+            <Input
+              onChange={(e) => handleOnChange(e, 'endereco.rua')}
+              value={data.endereco.rua}
+              id="endereco"
+            />
+          </div>
+          <div className="form-field">
+            <Label htmlFor="endereco">Numero</Label>
+            <Input
+              onChange={(e) => handleOnChange(e, 'endereco.numero')}
+              value={data.endereco?.numero ?? ''}
+              id="endereco"
+            />
+          </div>
         </div>
-      </div>
       <div className="contatos-cliente">
         <h4 className="contatos-cliente-heading">Contatos</h4>
-        <Table columns={contatoColumns} data={contatos} size="small" />
+        <Table tableType={"contato"} data={contatos} size="small" />
       </div>
       <div className="form-actions">
         <Button onClick={() => onDelete(data.id)} variant="delete small">
@@ -88,4 +113,4 @@ function ClienteForm({ cliente, contatos, onSave, onDelete, onClose }) {
   );
 }
 
-export default ClienteForm;
+export default UpdateClienteForm;
