@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* || Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* || Styles */
+
+:root {
+  --color-default: #343a40;
+
+  --color-primary: #4285f4;
+  --color-primary-hover: #3a7be5;
+
+  --color-add: #0f9d58;
+  --color-add-hover: #0d864f;
+
+  --color-edit: #ffc107;
+  --color-edit-hover: #e0ac05;
+
+  --color-delete: #f44336;
+  --color-delete-hover: #d13629;
+
+  --color-neutral: #e5e5e5;
+  --color-neutral-light: #ecf0f1;
+
+  --font: Inter, sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  color: var(--color-default);
+  font-family: var(--font);
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+h4 {
+  font-size: 0.9rem;
+}
+
+/* || Forms */
+
+.form {
+  width: 600px;
+  display: grid;
+  gap: 1em;
+  border: 2px solid var(--color-neutral);
+  border-top: 1em;
+  padding-bottom: 1.5em;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.form-header {
+  display: flex;
+  background-color: var(--color-primary);
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  padding: 0.3em;
+  padding-left: 0.5em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: calc(100% + 4px);
+  transform: translateX(-2px);
+}
+
+.form-row {
+  display: flex;
+  padding-inline: 1em;
+  gap: 1em;
+}
+
+.form-field {
+  flex-basis: 100%;
+}
+
+.contatos-cliente {
+  padding-inline: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form-actions {
+  padding-top: 2em;
+  padding-inline: 1em;
+  justify-self: end;
+  display: flex;
+  gap: 1em;
+}
+
+.form-field-legend {
+  display: flex;
+  flex-basis: 100%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-inline: 0.9em;
+}
