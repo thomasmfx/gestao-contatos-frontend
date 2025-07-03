@@ -2,18 +2,19 @@
 import { ref } from 'vue';
 import AppInput from './AppInput.vue';
 import AppButton from './AppButton.vue';
+import SearchIcon from '@/assets/icons/search.svg';
 
 interface Props {
   placeholder?: string;
 }
 
-const value = ref<string>('');
+const value = ref<string | number>('');
 const emit = defineEmits(['search']);
 const { placeholder = '' } = defineProps<Props>();
 
 function handleSubmit(e: unknown) {
   (e as Event).preventDefault();
-  emit('search');
+  emit('search', value.value);
 }
 </script>
 
@@ -26,7 +27,7 @@ function handleSubmit(e: unknown) {
       :placeholder="placeholder"
     />
     <AppButton @click="handleSubmit" type="submit" isSquare>
-      O
+      <img :src="SearchIcon" alt="Search">
     </AppButton>
   </form>
 </template>

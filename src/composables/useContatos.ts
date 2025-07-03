@@ -33,7 +33,7 @@ export function useContatos(): UseContatosResult {
   const setContatos = async (clienteId?: ID): Promise<void> => {
     contatosLoading.value = true;
     try {
-      const url = clienteId ? `${baseUrl}?clienteId=${clienteId}` : baseUrl;
+      const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch contacts');
       const data: Contato[] = await response.json();

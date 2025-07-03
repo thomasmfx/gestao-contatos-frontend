@@ -173,8 +173,8 @@ function handleDeleteContato(id: ID) {
       <h2>Contatos</h2>
       <AppTable 
         type="contato"
-        @select-row="handleSelectContato"
         :data="contatosData"
+        @select-row="handleSelectContato"
       />
     </section>
   </main>
