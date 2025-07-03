@@ -1,13 +1,16 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 import type { Cliente } from '@/types/Cliente';
 import type { Contato } from '@/types/Contato';
-import AppTable from './AppTable.vue';
+
+import X from '@/assets/icons/x.svg';
+
 import FormRowLegend from './FormRowLegend.vue';
 import AppButton from './AppButton.vue';
-import AppLabel from './AppLabel.vue';
 import AppInput from './AppInput.vue';
-import { ref } from 'vue';
-import X from '@/assets/icons/x.svg';
+import AppLabel from './AppLabel.vue';
+import AppTable from './AppTable.vue';
 
 interface Props {
   cliente: Cliente;

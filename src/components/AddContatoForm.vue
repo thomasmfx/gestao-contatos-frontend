@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import AppButton from './AppButton.vue';
-import AppLabel from './AppLabel.vue';
-import AppInput from './AppInput.vue';
-import AppSelect from './AppSelect.vue';
-import FormRowLegend from './FormRowLegend.vue';
-import tiposContato from '@/utils/tiposContato';
 import { ref } from 'vue';
+
 import type { ContatoPayload } from '@/types/Contato';
+
+import tiposContato from '@/utils/tiposContato';
 import X from '@/assets/icons/x.svg';
+
+import FormRowLegend from './FormRowLegend.vue';
+import AppButton from './AppButton.vue';
+import AppSelect from './AppSelect.vue';
+import AppInput from './AppInput.vue';
+import AppLabel from './AppLabel.vue';
 
 const contatoInitialData: ContatoPayload = {
   clienteId: '',

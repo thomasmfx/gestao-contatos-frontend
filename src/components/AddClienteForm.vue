@@ -1,11 +1,14 @@
 <script lang="ts" setup>
-import AppButton from './AppButton.vue';
-import AppLabel from './AppLabel.vue';
-import AppInput from './AppInput.vue';
-import type { ClientePayload } from '@/types/Cliente';
-import FormRowLegend from './FormRowLegend.vue';
 import { ref } from 'vue';
+
+import type { ClientePayload } from '@/types/Cliente';
+
 import X from '@/assets/icons/x.svg';
+
+import FormRowLegend from './FormRowLegend.vue';
+import AppButton from './AppButton.vue';
+import AppInput from './AppInput.vue';
+import AppLabel from './AppLabel.vue';
 
 const clienteInitialData: ClientePayload = {
   nome: '',

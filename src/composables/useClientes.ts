@@ -1,12 +1,14 @@
-import { isError } from '../utils/isError';
+import { ref, type Ref } from 'vue';
+
 import type {
   Cliente,
   ClientePayload,
   ClienteUpdatePayload,
 } from '../types/Cliente';
-import API_URL from '../utils/API';
 import type { ID } from '../types/ID';
-import { ref, type Ref } from 'vue';
+
+import { isError } from '../utils/isError';
+import API_URL from '../utils/API';
 
 interface UseClientsResult {
   clientesData: Ref<Cliente[] | []>;

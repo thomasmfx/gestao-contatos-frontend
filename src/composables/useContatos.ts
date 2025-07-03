@@ -1,12 +1,14 @@
-import { isError } from '../utils/isError';
+import { ref, type Ref } from 'vue';
+
 import type {
   Contato,
   ContatoPayload,
   ContatoUpdatePayload,
 } from '../types/Contato';
-import API_URL from '../utils/API';
 import type { ID } from '../types/ID';
-import { ref, type Ref } from 'vue';
+
+import { isError } from '../utils/isError';
+import API_URL from '../utils/API';
 
 interface UseContatosResult {
   contatosData: Ref<Contato[] | []>;

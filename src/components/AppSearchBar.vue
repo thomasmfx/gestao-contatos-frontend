@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import AppInput from './AppInput.vue';
-import AppButton from './AppButton.vue';
+
 import SearchIcon from '@/assets/icons/search.svg';
+
+import AppButton from './AppButton.vue';
+import AppInput from './AppInput.vue';
 
 interface Props {
   placeholder?: string;

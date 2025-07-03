@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import type { Contato } from '@/types/Contato';
-import tiposContato from '@/utils/tiposContato';
-import AppButton from './AppButton.vue';
-import AppLabel from './AppLabel.vue';
-import AppInput from './AppInput.vue';
-import AppSelect from './AppSelect.vue';
 import { ref } from 'vue';
+
+import type { Contato } from '@/types/Contato';
+
+import tiposContato from '@/utils/tiposContato';
 import X from '@/assets/icons/x.svg';
+
+import AppButton from './AppButton.vue';
+import AppSelect from './AppSelect.vue';
+import AppInput from './AppInput.vue';
+import AppLabel from './AppLabel.vue';
 
 interface Props {
   contato: Contato;

@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
+
 import type { Cliente } from '@/types/Cliente';
 import type { Contato } from '@/types/Contato';
 import type { ID } from '@/types/ID';
+
+import { clienteColumns, contatoColumns } from '@/utils/tableColumns';
 import { formatarData, formatarDocumento } from '@/utils/formatData';
 import { getEnderecoRuaAndNumero } from '@/utils/formatEndereco';
-import { clienteColumns, contatoColumns } from '@/utils/tableColumns';
-import { computed } from 'vue';
 
 interface Props {
   type: 'cliente' | 'contato';

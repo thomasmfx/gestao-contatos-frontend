@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useClientes } from '@/composables/useClientes';
-import { useContatos } from '@/composables/useContatos';
+import { onMounted, ref } from 'vue';
+
 import type {
   Cliente,
   ClientePayload,
@@ -12,15 +12,16 @@ import type {
   ContatoUpdatePayload,
 } from '@/types/Contato';
 import type { ID } from '@/types/ID';
-import { onMounted, ref } from 'vue';
 
-import AppModal from '@/components/AppModal.vue';
-import AddClienteForm from '@/components/AddClienteForm.vue';
 import UpdateClienteForm from '@/components/UpdateClienteForm.vue';
-import AddContatoForm from '@/components/AddContatoForm.vue';
 import UpdateContatoForm from '@/components/UpdateContatoForm.vue';
+import AddClienteForm from '@/components/AddClienteForm.vue';
+import AddContatoForm from '@/components/AddContatoForm.vue';
 import AppSearchBar from '@/components/AppSearchBar.vue';
+import { useClientes } from '@/composables/useClientes';
+import { useContatos } from '@/composables/useContatos';
 import AppButton from '@/components/AppButton.vue';
+import AppModal from '@/components/AppModal.vue';
 import AppTable from '@/components/AppTable.vue';
 
 const {
