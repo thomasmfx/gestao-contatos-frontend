@@ -6,6 +6,7 @@ import AppLabel from './AppLabel.vue';
 import AppInput from './AppInput.vue';
 import AppSelect from './AppSelect.vue';
 import { ref } from 'vue';
+import X from '@/assets/icons/x.svg';
 
 interface Props {
   contato: Contato;
@@ -41,7 +42,7 @@ function handleCancelarEmit(e: Event) {
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Contato</h3>
       <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
-        X
+        <img :src="X" alt="Close">
       </AppButton>
     </header>
     <div class="form-row">
