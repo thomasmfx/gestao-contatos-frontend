@@ -35,14 +35,11 @@ function handleCancelarEmit(e: Event) {
 </script>
 
 <template>
-  <form
-    class="form"
-    @submit="handleSalvarEmit"
-  >
+  <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
       <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
-        <img :src="X" alt="Close">
+        <img :src="X" alt="Close" />
       </AppButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>

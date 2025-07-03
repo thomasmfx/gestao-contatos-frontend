@@ -35,14 +35,11 @@ function handleCancelarEmit(e: Event) {
 </script>
 
 <template>
-  <form
-    class="form"
-    @submit="handleSalvarEmit"
-  >
+  <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Contato</h3>
       <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
-        <img :src="X" alt="Close">
+        <img :src="X" alt="Close" />
       </AppButton>
     </header>
     <div class="form-row">
@@ -63,11 +60,7 @@ function handleCancelarEmit(e: Event) {
       </div>
       <div class="form-field">
         <AppLabel htmlFor="data-nascimento">Valor</AppLabel>
-        <AppInput
-          v-model="data.valor"
-          id="data-nascimento"
-          required
-        />
+        <AppInput v-model="data.valor" id="data-nascimento" required />
       </div>
     </div>
     <div class="form-row">

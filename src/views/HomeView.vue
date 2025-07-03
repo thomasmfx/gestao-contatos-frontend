@@ -1,8 +1,16 @@
 <script lang="ts" setup>
 import { useClientes } from '@/composables/useClientes';
 import { useContatos } from '@/composables/useContatos';
-import type { Cliente, ClientePayload, ClienteUpdatePayload } from '@/types/Cliente';
-import type { Contato, ContatoPayload, ContatoUpdatePayload } from '@/types/Contato';
+import type {
+  Cliente,
+  ClientePayload,
+  ClienteUpdatePayload,
+} from '@/types/Cliente';
+import type {
+  Contato,
+  ContatoPayload,
+  ContatoUpdatePayload,
+} from '@/types/Contato';
 import type { ID } from '@/types/ID';
 import { onMounted, ref } from 'vue';
 
@@ -38,13 +46,13 @@ const selectedCliente = ref<Cliente | null>(null);
 const selectedClienteContatos = ref<Contato[] | null>(null);
 const isAddingCliente = ref<boolean>(false);
 
-const selectedContato = ref<Contato | null>(null)
-const isAddingContato = ref<boolean>(false)
+const selectedContato = ref<Contato | null>(null);
+const isAddingContato = ref<boolean>(false);
 
 onMounted(() => {
-  setClientes()
-  setContatos()
-})
+  setClientes();
+  setContatos();
+});
 
 // Funções para gerenciar clientes
 function handleSelectCliente(id: ID | string) {
@@ -109,14 +117,17 @@ function handleDeleteContato(id: ID) {
 </script>
 
 <template>
-    <AppModal v-if="isAddingCliente" @close="isAddingCliente = false">
-    <AddClienteForm 
+  <AppModal v-if="isAddingCliente" @close="isAddingCliente = false">
+    <AddClienteForm
       @cancelar="isAddingCliente = false"
       @salvar="handleAddCliente"
     />
   </AppModal>
 
-  <AppModal v-if="selectedCliente && selectedClienteContatos" @close="selectedCliente = null">
+  <AppModal
+    v-if="selectedCliente && selectedClienteContatos"
+    @close="selectedCliente = null"
+  >
     <UpdateClienteForm
       :cliente="selectedCliente"
       :contatos="selectedClienteContatos"
@@ -127,16 +138,16 @@ function handleDeleteContato(id: ID) {
   </AppModal>
 
   <AppModal v-if="isAddingContato" @close="isAddingContato = false">
-    <AddContatoForm 
+    <AddContatoForm
       @cancelar="isAddingContato = false"
       @salvar="handleAddContato"
     />
   </AppModal>
 
-  <AppModal v-if="selectedContato"@close="selectedContato = null">
+  <AppModal v-if="selectedContato" @close="selectedContato = null">
     <UpdateContatoForm
       :contato="selectedContato"
-      @cancelar ="selectedContato = null"
+      @cancelar="selectedContato = null"
       @excluir="handleDeleteContato"
       @salvar="handleUpdateContato"
     />
@@ -145,7 +156,7 @@ function handleDeleteContato(id: ID) {
   <main class="main">
     <section class="section">
       <header class="header">
-        <AppSearchBar 
+        <AppSearchBar
           placeholder="Buscar cliente por Nome ou CPF"
           @search="setClientes"
         />
@@ -154,7 +165,7 @@ function handleDeleteContato(id: ID) {
         </AppButton>
       </header>
       <h2>Clientes</h2>
-      <AppTable 
+      <AppTable
         type="cliente"
         :data="clientesData"
         @select-row="handleSelectCliente"
@@ -162,7 +173,7 @@ function handleDeleteContato(id: ID) {
     </section>
     <section class="section">
       <header class="header">
-        <AppSearchBar 
+        <AppSearchBar
           placeholder="Buscar contato por ID Cliente"
           @search="setContatos"
         />
@@ -171,7 +182,7 @@ function handleDeleteContato(id: ID) {
         </AppButton>
       </header>
       <h2>Contatos</h2>
-      <AppTable 
+      <AppTable
         type="contato"
         :data="contatosData"
         @select-row="handleSelectContato"

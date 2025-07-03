@@ -27,7 +27,7 @@ function handleSubmit(e: unknown) {
       :placeholder="placeholder"
     />
     <AppButton @click="handleSubmit" type="submit" isSquare>
-      <img :src="SearchIcon" alt="Search">
+      <img :src="SearchIcon" alt="Search" />
     </AppButton>
   </form>
 </template>
