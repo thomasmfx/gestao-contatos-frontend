@@ -6,7 +6,7 @@ interface Props {
   type?: InputTypeHTMLAttribute;
   disabled?: boolean;
   placeholder?: string;
-  modelValue: string | number;
+  modelValue?: string | number;
   required?: boolean;
 }
 
