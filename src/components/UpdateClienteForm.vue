@@ -43,11 +43,22 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Cliente</h3>
-      <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
+      <AppButton
+        class="button-close"
+        variant="transparent"
+        isSquare
+        @click="handleCancelarEmit"
+      >
         <img :src="X" alt="Close" />
       </AppButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>
+    <div class="form-row">
+      <div class="form-field">
+        <AppLabel htmlFor="nome">ID</AppLabel>
+        <AppInput :modelValue="data.id" id="nome" disabled required />
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-field">
         <AppLabel htmlFor="nome">Nome</AppLabel>
@@ -75,13 +86,29 @@ function handleCancelarEmit(e: Event) {
         <AppLabel htmlFor="endereco">Rua</AppLabel>
         <AppInput v-model="data.endereco.rua" id="endereco" />
       </div>
+    </div>
+    <div class="form-row">
       <div class="form-field">
         <AppLabel htmlFor="endereco">Numero</AppLabel>
-        <AppInput v-model="data.endereco.numero!" id="endereco" />
+        <AppInput v-model="data.endereco.numero" id="endereco" />
+      </div>
+      <div class="form-field">
+        <AppLabel htmlFor="cidade">Cidade</AppLabel>
+        <AppInput v-model="data.endereco.cidade" id="cidade" />
       </div>
     </div>
-    <div className="contatos-cliente">
-      <h4 className="contatos-cliente-heading">Contatos</h4>
+    <div class="form-row">
+      <div class="form-field">
+        <AppLabel htmlFor="estado">Estado</AppLabel>
+        <AppInput v-model="data.endereco.estado" id="estado" />
+      </div>
+      <div class="form-field">
+        <AppLabel htmlFor="estado">CEP</AppLabel>
+        <AppInput v-model="data.endereco.cep" id="estado" />
+      </div>
+    </div>
+    <FormRowLegend>Contatos</FormRowLegend>
+    <div class="form-row">
       <AppTable type="contato" :data="props.contatos" size="small" />
     </div>
     <div class="form-actions">

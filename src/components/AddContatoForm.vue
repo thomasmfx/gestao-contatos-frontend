@@ -37,7 +37,12 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
-      <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
+      <AppButton
+        class="button-close"
+        variant="transparent"
+        isSquare
+        @click="handleCancelarEmit"
+      >
         <img :src="X" alt="Close" />
       </AppButton>
     </header>

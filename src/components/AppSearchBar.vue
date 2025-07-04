@@ -28,7 +28,12 @@ function handleSubmit(e: unknown) {
       class="searchbar-input"
       :placeholder="placeholder"
     />
-    <AppButton @click="handleSubmit" type="submit" isSquare>
+    <AppButton
+      class="button-search"
+      type="submit"
+      isSquare
+      @click="handleSubmit"
+    >
       <img :src="SearchIcon" alt="Search" />
     </AppButton>
   </form>

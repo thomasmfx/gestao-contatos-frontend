@@ -41,10 +41,21 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Contato</h3>
-      <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
+      <AppButton
+        @click="handleCancelarEmit"
+        variant="transparent"
+        isSquare
+        class="button-close"
+      >
         <img :src="X" alt="Close" />
       </AppButton>
     </header>
+    <div class="form-row">
+      <div class="form-field">
+        <AppLabel htmlFor="nome">ID</AppLabel>
+        <AppInput :modelValue="data.id" id="nome" disabled required />
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-field">
         <AppLabel htmlFor="nome">ID Cliente</AppLabel>

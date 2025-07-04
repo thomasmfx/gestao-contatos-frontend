@@ -41,7 +41,12 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
-      <AppButton @click="handleCancelarEmit" variant="transparent" isSquare>
+      <AppButton
+        class="button-close"
+        variant="transparent"
+        isSquare
+        @click="handleCancelarEmit"
+      >
         <img :src="X" alt="Close" />
       </AppButton>
     </header>
@@ -73,9 +78,25 @@ function handleCancelarEmit(e: Event) {
         <AppLabel htmlFor="endereco">Rua</AppLabel>
         <AppInput v-model="data.endereco.rua" id="endereco" />
       </div>
+    </div>
+    <div class="form-row">
       <div class="form-field">
         <AppLabel htmlFor="endereco">Numero</AppLabel>
         <AppInput v-model="data.endereco.numero!" id="endereco" />
+      </div>
+      <div class="form-field">
+        <AppLabel htmlFor="cidade">Cidade</AppLabel>
+        <AppInput v-model="data.endereco.cidade!" id="cidade" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <AppLabel htmlFor="estado">Estado</AppLabel>
+        <AppInput v-model="data.endereco.estado!" id="estado" />
+      </div>
+      <div class="form-field">
+        <AppLabel htmlFor="estado">CEP</AppLabel>
+        <AppInput v-model="data.endereco.cep!" id="estado" />
       </div>
     </div>
     <div class="form-actions">
