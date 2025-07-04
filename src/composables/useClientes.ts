@@ -38,7 +38,7 @@ export function useClientes(): UseClientsResult {
     try {
       const url = search ? `${baseUrl}?search=${search}` : baseUrl;
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch clients');
+      if (!response.ok) throw new Error('Falha ao buscar clientes');
       const data: Cliente[] = await response.json();
       clientesData.value = data;
       return data;
@@ -54,7 +54,7 @@ export function useClientes(): UseClientsResult {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch client');
+      if (!response.ok) throw new Error('Cliente não encontrado');
       return await response.json();
     } catch (error) {
       clientesError.value = isError(error) ? error.message : 'Unknown error';
@@ -70,7 +70,7 @@ export function useClientes(): UseClientsResult {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Failed to add client');
+      if (!response.ok) throw new Error('Erro ao adicionar cliente');
       return await response.json();
     } catch (error) {
       clientesError.value = isError(error) ? error.message : 'Unknown error';

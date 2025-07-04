@@ -14,7 +14,7 @@ interface UseContatosResult {
   contatosData: Ref<Contato[] | []>;
   contatosLoading: Ref<boolean>;
   contatosError: Ref<string | null>;
-  setContatos: (clienteId?: ID) => Promise<void>;
+  setContatos: (clienteId?: ID) => Promise<Contato[] | null>;
   getContatos: (clienteId: ID) => Promise<Contato[] | null>;
   getSingleContato: (id: ID) => Promise<Contato | null>;
   addContato: (data: ContatoPayload) => Promise<Contato>;
@@ -32,7 +32,7 @@ export function useContatos(): UseContatosResult {
 
   const baseUrl = `${API_URL}/contatos`;
 
-  const setContatos = async (clienteId?: ID): Promise<void> => {
+  const setContatos = async (clienteId?: ID): Promise<Contato[] | null> => {
     contatosLoading.value = true;
     try {
       const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
@@ -40,8 +40,10 @@ export function useContatos(): UseContatosResult {
       if (!response.ok) throw new Error('Failed to fetch contacts');
       const data: Contato[] = await response.json();
       contatosData.value = data;
+      return data;
     } catch (error) {
       contatosError.value = isError(error) ? error.message : 'Unknown error';
+      return null;
     } finally {
       contatosLoading.value = false;
     }

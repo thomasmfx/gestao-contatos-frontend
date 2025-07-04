@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { toast, type ToastType } from 'vue3-toastify';
 import { onMounted, ref } from 'vue';
 
 import type {
@@ -12,6 +13,7 @@ import type {
   ContatoUpdatePayload,
 } from '@/types/Contato';
 import type { ID } from '@/types/ID';
+import 'vue3-toastify/dist/index.css';
 
 import UpdateClienteForm from '@/components/UpdateClienteForm.vue';
 import UpdateContatoForm from '@/components/UpdateContatoForm.vue';
@@ -55,6 +57,30 @@ onMounted(() => {
   setContatos();
 });
 
+function notify(type: ToastType, msg: string) {
+  toast(msg, {
+    theme: 'light',
+    type: type,
+    hideProgressBar: true,
+    position: 'top-center',
+    dangerouslyHTMLString: true,
+    autoClose: 2000,
+  });
+}
+
+function handleSearchCliente(search: string | number) {
+  setClientes(search).then((cliente) => {
+    if (!cliente?.length) notify('warning', 'Cliente não encontrado!');
+  });
+}
+
+function handleSearchContatos(clienteId: ID) {
+  setContatos(clienteId).then((contato) => {
+    if (!contato?.length)
+      notify('warning', 'Contatos não encontrado para este cliente!');
+  });
+}
+
 // Funções para gerenciar clientes
 function handleSelectCliente(id: ID | string) {
   getSingleCliente(id).then((cliente) => {
@@ -66,18 +92,28 @@ function handleSelectCliente(id: ID | string) {
 }
 
 function handleAddCliente(data: ClientePayload) {
-  addCliente(data).then(() => {
-    isAddingCliente.value = false;
-    setClientes();
-  });
+  addCliente(data)
+    .then(() => {
+      isAddingCliente.value = false;
+      setClientes();
+      notify('success', 'Cliente adicionado com sucesso!');
+    })
+    .catch((error) => {
+      notify('error', error.message);
+    });
 }
 
 function handleUpdateCliente(id: ID, newData: ClienteUpdatePayload) {
-  updateCliente(newData, id).then(() => {
-    selectedCliente.value = null;
-    setClientes();
-    setContatos();
-  });
+  updateCliente(newData, id)
+    .then(() => {
+      selectedCliente.value = null;
+      setClientes();
+      setContatos();
+      notify('success', 'Cliente atualizado com sucesso!');
+    })
+    .catch((error) => {
+      notify('error', error.message);
+    });
 }
 
 function handleDeleteCliente(id: ID) {
@@ -85,6 +121,7 @@ function handleDeleteCliente(id: ID) {
     selectedCliente.value = null;
     setClientes();
     setContatos();
+    notify('success', 'Cliente excluído com sucesso!');
   });
 }
 
@@ -96,23 +133,34 @@ function handleSelectContato(id: ID) {
 }
 
 function handleAddContato(data: ContatoPayload) {
-  addContato(data).then(() => {
-    isAddingContato.value = false;
-    setContatos();
-  });
+  addContato(data)
+    .then(() => {
+      isAddingContato.value = false;
+      setContatos();
+      notify('success', 'Contato adicionado com sucesso!');
+    })
+    .catch((error) => {
+      notify('error', error.message);
+    });
 }
 
 function handleUpdateContato(id: ID, newData: ContatoUpdatePayload) {
-  updateContato(id, newData).then(() => {
-    selectedContato.value = null;
-    setContatos();
-  });
+  updateContato(id, newData)
+    .then(() => {
+      selectedContato.value = null;
+      setContatos();
+      notify('success', 'Contato atualizado com sucesso!');
+    })
+    .catch((error) => {
+      notify('error', error.message);
+    });
 }
 
 function handleDeleteContato(id: ID) {
   deleteContato(id).then(() => {
     selectedContato.value = null;
     setContatos();
+    notify('success', 'Contato excluído com sucesso!');
   });
 }
 </script>
@@ -159,7 +207,7 @@ function handleDeleteContato(id: ID) {
       <header class="header">
         <AppSearchBar
           placeholder="Buscar cliente por Nome ou CPF"
-          @search="setClientes"
+          @search="handleSearchCliente"
         />
         <AppButton variant="add" @click="isAddingCliente = true">
           <span>Novo Cliente</span>
@@ -176,7 +224,7 @@ function handleDeleteContato(id: ID) {
       <header class="header">
         <AppSearchBar
           placeholder="Buscar contato por ID Cliente"
-          @search="setContatos"
+          @search="handleSearchContatos"
         />
         <AppButton variant="add" @click="isAddingContato = true">
           <span>Novo Contato</span>
