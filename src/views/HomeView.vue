@@ -64,7 +64,7 @@ function notify(type: ToastType, msg: string) {
     hideProgressBar: true,
     position: 'top-center',
     dangerouslyHTMLString: true,
-    autoClose: 2000,
+    autoClose: 2500,
   });
 }
 
@@ -77,7 +77,7 @@ function handleSearchCliente(search: string | number) {
 function handleSearchContatos(clienteId: ID) {
   setContatos(clienteId).then((contato) => {
     if (!contato?.length)
-      notify('warning', 'Contatos não encontrado para este cliente!');
+      notify('warning', 'Nenhum contato encontrado para este cliente!');
   });
 }
 
