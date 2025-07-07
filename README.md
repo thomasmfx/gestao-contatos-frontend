@@ -4,10 +4,8 @@ Este repositório contém a implementação frontend do sistema de gestão de co
 
 ## Tecnologias Utilizadas
 
-- HTML
-- CSS
-- JavaScript
-- React
+- TypeScript
+- Vue
 
 ## Estrutura do Projeto
 
@@ -16,12 +14,13 @@ Este repositório contém a implementação frontend do sistema de gestão de co
 ├── src/
 │   ├── assets/
 │   ├── components/
-│   ├── hooks/
-│   ├── pages/
-│   ├── styles/
+│   ├── composables/
+│   ├── types/
 │   ├── utils/
-│   ├── App.jsx
-│   └── main.jsx
+│   ├── views/
+│   ├── App.vue
+│   └── main.ts
+├── Dockerfile
 ├── index.html
 ├── package.json
 └── README.md
@@ -33,50 +32,15 @@ Este repositório contém a implementação frontend do sistema de gestão de co
 - Interface para cadastro, edição e exclusão de contatos
 - Listagem de clientes e contatos com opções de filtro
 - Visualização detalhada de clientes e contatos
+- Notificações para dar feedbak às ações do usuário
 
-## Instalação
+## Configuração das variáveis de ambiente
 
-1. Caso ainda não tenha clonado o repositório, execute o seguinte comando:
+Para estabelecer a conexão com o backend, basta criar um arquivo `.env` na raíz do projeto e definir uma única variável:
 
-```bash
-git clone https://github.com/thomasmfx/gestao-contatos-frontend.git
 ```
-
-2. Navegue até o diretório do projeto:
-
-```bash
-cd gestao-contatos-frontend
+VITE_API_URL=http://localhost:7772
 ```
-
-## Execução
-
-### Pré-requisitos
-
-- Node.js instalado
-- npm instalado
-
-### Passos para Execução
-
-1. Instale as dependências:
-
-```bash
-npm install
-```
-
-2. Se necessário, configure a URL da API no arquivo de configuração (src/utils/API.js):
-
-```javascript
-// Ajuste para o endereço onde o backend está rodando
-const API_URL = 'http://localhost:8080/';
-```
-
-3. Inicie o servidor de desenvolvimento:
-
-```bash
-npm run dev
-```
-
-Pronto! A aplicação estará disponível na URL emitida pelo terminal, que por padrão é: `http://localhost:5173`
 
 ## Integração com o Backend
 
@@ -84,7 +48,7 @@ Este frontend está configurado para se comunicar com a API RESTful disponível 
 
 Para que o sistema funcione corretamente, certifique-se de que:
 
-- O backend está em execução
+- O backend está em execução no mesmo ambiente Docker
 - A URL base da API está configurada corretamente
 
 ## Screenshots
