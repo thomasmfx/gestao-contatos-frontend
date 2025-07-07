@@ -64,7 +64,8 @@ function notify(type: ToastType, msg: string) {
     hideProgressBar: true,
     position: 'top-center',
     dangerouslyHTMLString: true,
-    autoClose: 2500,
+    autoClose: 2000,
+    transition: 'slide',
   });
 }
 
