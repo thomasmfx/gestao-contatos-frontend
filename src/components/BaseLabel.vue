@@ -10,7 +10,7 @@ const props = defineProps<{
   </label>
 </template>
 
-<style lang="css" scoped>
+<style scoped>
 .label {
   font-size: 0.9rem;
 }

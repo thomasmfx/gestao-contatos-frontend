@@ -34,7 +34,7 @@ function handleInputEvent(event: Event) {
   />
 </template>
 
-<style>
+<style scoped>
 .input {
   width: 100%;
   height: 35px;
