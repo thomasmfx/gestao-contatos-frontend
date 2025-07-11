@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* || Reset */
 
@@ -65,6 +65,13 @@ select {
   --color-neutral-light: #ecf0f1;
 
   --font: Inter, sans-serif;
+  --font-menu: Montserrat, sans-serif;
+
+  --pill-radius: 999em;
+
+  --transition-fast: 100ms ease-in-out;
+  --transition-regular: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
 }
 
 #app {
