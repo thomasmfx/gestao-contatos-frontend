@@ -6,10 +6,10 @@ import type { Contato } from '@/types/Contato';
 import tiposContato from '@/utils/tiposContato';
 import X from '@/assets/icons/x.svg';
 
-import AppButton from './AppButton.vue';
-import AppSelect from './AppSelect.vue';
-import AppInput from './AppInput.vue';
-import AppLabel from './AppLabel.vue';
+import BaseButton from './BaseButton.vue';
+import BaseSelect from './BaseSelect.vue';
+import BaseInput from './BaseInput.vue';
+import BaseLabel from './BaseLabel.vue';
 
 interface Props {
   contato: Contato;
@@ -41,31 +41,31 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Contato</h3>
-      <AppButton
+      <BaseButton
         @click="handleCancelarEmit"
         variant="transparent"
         isSquare
         class="button-close"
       >
         <img :src="X" alt="Close" />
-      </AppButton>
+      </BaseButton>
     </header>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="nome">ID</AppLabel>
-        <AppInput :modelValue="data.id" id="nome" disabled required />
+        <BaseLabel htmlFor="nome">ID</BaseLabel>
+        <BaseInput :modelValue="data.id" id="nome" disabled required />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="nome">ID Cliente</AppLabel>
-        <AppInput v-model="data.clienteId" id="nome" required />
+        <BaseLabel htmlFor="nome">ID Cliente</BaseLabel>
+        <BaseInput v-model="data.clienteId" id="nome" required />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="cpf">Tipo</AppLabel>
-        <AppSelect
+        <BaseLabel htmlFor="cpf">Tipo</BaseLabel>
+        <BaseSelect
           v-model="data.tipo"
           :options="[...tiposContato]"
           id="tipo"
@@ -73,25 +73,25 @@ function handleCancelarEmit(e: Event) {
         />
       </div>
       <div class="form-field">
-        <AppLabel htmlFor="data-nascimento">Valor</AppLabel>
-        <AppInput v-model="data.valor" id="data-nascimento" required />
+        <BaseLabel htmlFor="data-nascimento">Valor</BaseLabel>
+        <BaseInput v-model="data.valor" id="data-nascimento" required />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="endereco">Observação</AppLabel>
-        <AppInput v-model="data.observacao" id="endereco" />
+        <BaseLabel htmlFor="endereco">Observação</BaseLabel>
+        <BaseInput v-model="data.observacao" id="endereco" />
       </div>
     </div>
     <div class="form-actions">
-      <AppButton
+      <BaseButton
         @click="handleExcluirEmit"
         variant="delete small"
         type="button"
       >
         Excluir
-      </AppButton>
-      <AppButton variant="add small" type="submit"> Salvar </AppButton>
+      </BaseButton>
+      <BaseButton variant="add small" type="submit"> Salvar </BaseButton>
     </div>
   </form>
 </template>

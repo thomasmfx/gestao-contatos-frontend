@@ -5,7 +5,6 @@ import type {
   ContatoPayload,
   ContatoUpdatePayload,
 } from '../types/Contato';
-import type { ID } from '../types/ID';
 
 import { isError } from '../utils/isError';
 import API_URL from '../utils/API';
@@ -14,15 +13,15 @@ interface UseContatosResult {
   contatosData: Ref<Contato[] | []>;
   contatosLoading: Ref<boolean>;
   contatosError: Ref<string | null>;
-  setContatos: (clienteId?: ID) => Promise<Contato[] | null>;
-  getContatos: (clienteId: ID) => Promise<Contato[] | null>;
-  getSingleContato: (id: ID) => Promise<Contato | null>;
+  setContatos: (clienteId?: number) => Promise<Contato[] | null>;
+  getContatos: (clienteId: number) => Promise<Contato[] | null>;
+  getSingleContato: (id: number) => Promise<Contato | null>;
   addContato: (data: ContatoPayload) => Promise<Contato>;
   updateContato: (
-    id: ID,
+    id: number,
     newData: ContatoUpdatePayload,
   ) => Promise<Contato | null>;
-  deleteContato: (id: ID) => Promise<boolean>;
+  deleteContato: (id: number) => Promise<boolean>;
 }
 
 export function useContatos(): UseContatosResult {
@@ -32,7 +31,7 @@ export function useContatos(): UseContatosResult {
 
   const baseUrl = `${API_URL}/contatos`;
 
-  const setContatos = async (clienteId?: ID): Promise<Contato[] | null> => {
+  const setContatos = async (clienteId?: number): Promise<Contato[] | null> => {
     contatosLoading.value = true;
     try {
       const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
@@ -49,7 +48,7 @@ export function useContatos(): UseContatosResult {
     }
   };
 
-  const getContatos = async (clienteId: ID): Promise<Contato[] | null> => {
+  const getContatos = async (clienteId: number): Promise<Contato[] | null> => {
     contatosLoading.value = true;
     try {
       const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
@@ -65,7 +64,7 @@ export function useContatos(): UseContatosResult {
     }
   };
 
-  const getSingleContato = async (id: ID): Promise<Contato | null> => {
+  const getSingleContato = async (id: number): Promise<Contato | null> => {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url);
@@ -94,7 +93,7 @@ export function useContatos(): UseContatosResult {
   };
 
   const updateContato = async (
-    id: ID,
+    id: number,
     newData: ContatoUpdatePayload,
   ): Promise<Contato | null> => {
     try {
@@ -112,7 +111,7 @@ export function useContatos(): UseContatosResult {
     }
   };
 
-  const deleteContato = async (id: ID): Promise<boolean> => {
+  const deleteContato = async (id: number): Promise<boolean> => {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url, {

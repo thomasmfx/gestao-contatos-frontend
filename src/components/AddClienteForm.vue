@@ -6,9 +6,9 @@ import type { ClientePayload } from '@/types/Cliente';
 import X from '@/assets/icons/x.svg';
 
 import FormRowLegend from './FormRowLegend.vue';
-import AppButton from './AppButton.vue';
-import AppInput from './AppInput.vue';
-import AppLabel from './AppLabel.vue';
+import BaseButton from './BaseButton.vue';
+import BaseInput from './BaseInput.vue';
+import BaseLabel from './BaseLabel.vue';
 
 const clienteInitialData: ClientePayload = {
   nome: '',
@@ -41,30 +41,30 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
-      <AppButton
+      <BaseButton
         class="button-close"
         variant="transparent"
         isSquare
         @click="handleCancelarEmit"
       >
         <img :src="X" alt="Close" />
-      </AppButton>
+      </BaseButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="nome">Nome</AppLabel>
-        <AppInput v-model="data.nome" id="nome" required />
+        <BaseLabel htmlFor="nome">Nome</BaseLabel>
+        <BaseInput v-model="data.nome" id="nome" required />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="cpf">CPF</AppLabel>
-        <AppInput v-model="data.cpf" required id="cpf" />
+        <BaseLabel htmlFor="cpf">CPF</BaseLabel>
+        <BaseInput v-model="data.cpf" required id="cpf" />
       </div>
       <div class="form-field">
-        <AppLabel htmlFor="data-nascimento">Data de Nascimento</AppLabel>
-        <AppInput
+        <BaseLabel htmlFor="data-nascimento">Data de Nascimento</BaseLabel>
+        <BaseInput
           v-model="data.dataNascimento"
           id="data-nascimento"
           type="date"
@@ -75,35 +75,35 @@ function handleCancelarEmit(e: Event) {
     <FormRowLegend>Informações de endereço</FormRowLegend>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="endereco">Rua</AppLabel>
-        <AppInput v-model="data.endereco.rua" id="endereco" />
+        <BaseLabel htmlFor="endereco">Rua</BaseLabel>
+        <BaseInput v-model="data.endereco.rua" id="endereco" />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="endereco">Numero</AppLabel>
-        <AppInput v-model="data.endereco.numero!" id="endereco" />
+        <BaseLabel htmlFor="endereco">Numero</BaseLabel>
+        <BaseInput v-model="data.endereco.numero!" id="endereco" />
       </div>
       <div class="form-field">
-        <AppLabel htmlFor="cidade">Cidade</AppLabel>
-        <AppInput v-model="data.endereco.cidade!" id="cidade" />
+        <BaseLabel htmlFor="cidade">Cidade</BaseLabel>
+        <BaseInput v-model="data.endereco.cidade!" id="cidade" />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <AppLabel htmlFor="estado">Estado</AppLabel>
-        <AppInput v-model="data.endereco.estado!" id="estado" />
+        <BaseLabel htmlFor="estado">Estado</BaseLabel>
+        <BaseInput v-model="data.endereco.estado!" id="estado" />
       </div>
       <div class="form-field">
-        <AppLabel htmlFor="estado">CEP</AppLabel>
-        <AppInput v-model="data.endereco.cep!" id="estado" />
+        <BaseLabel htmlFor="estado">CEP</BaseLabel>
+        <BaseInput v-model="data.endereco.cep!" id="estado" />
       </div>
     </div>
     <div class="form-actions">
-      <AppButton @click="handleCancelarEmit" variant="delete">
+      <BaseButton @click="handleCancelarEmit" variant="delete">
         Cancelar
-      </AppButton>
-      <AppButton variant="add" type="submit"> Salvar </AppButton>
+      </BaseButton>
+      <BaseButton variant="add" type="submit"> Salvar </BaseButton>
     </div>
   </form>
 </template>

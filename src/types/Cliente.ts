@@ -1,8 +1,7 @@
 import type { Endereco, EnderecoPayload } from './Endereco';
-import type { ID } from './ID';
 
 export interface Cliente {
-  id: ID;
+  id: number;
   nome: string;
   cpf: string;
   dataNascimento: string;

@@ -3,8 +3,8 @@ import { ref } from 'vue';
 
 import SearchIcon from '@/assets/icons/search.svg';
 
-import AppButton from './AppButton.vue';
-import AppInput from './AppInput.vue';
+import BaseButton from './BaseButton.vue';
+import BaseInput from './BaseInput.vue';
 
 interface Props {
   placeholder?: string;
@@ -22,20 +22,20 @@ function handleSubmit(e: unknown) {
 
 <template>
   <form @submit="handleSubmit" class="searchbar-form">
-    <AppInput
+    <BaseInput
       v-model="value"
       inputName="Barra de pesquisa"
       class="searchbar-input"
       :placeholder="placeholder"
     />
-    <AppButton
+    <BaseButton
       class="button-search"
       type="submit"
       isSquare
       @click="handleSubmit"
     >
       <img :src="SearchIcon" alt="Search" />
-    </AppButton>
+    </BaseButton>
   </form>
 </template>
 

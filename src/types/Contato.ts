@@ -1,7 +1,5 @@
-import type { ID } from './ID';
-
 export interface Contato {
-  id: ID;
+  id: number;
   clienteId: number | string;
   tipo: string;
   valor: string;

@@ -1,7 +1,5 @@
-import type { ID } from './ID';
-
 export interface Endereco {
-  id: ID;
+  id: number;
   rua: string;
   numero?: string;
   cidade?: string;

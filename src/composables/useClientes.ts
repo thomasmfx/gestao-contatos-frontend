@@ -5,7 +5,6 @@ import type {
   ClientePayload,
   ClienteUpdatePayload,
 } from '../types/Cliente';
-import type { ID } from '../types/ID';
 
 import { isError } from '../utils/isError';
 import API_URL from '../utils/API';
@@ -15,13 +14,13 @@ interface UseClientsResult {
   clientesLoading: Ref<boolean>;
   clientesError: Ref<string | null>;
   setClientes: (search?: string | number | null) => Promise<Cliente[] | null>;
-  getSingleCliente: (id: ID) => Promise<Cliente | null>;
+  getSingleCliente: (id: number) => Promise<Cliente | null>;
   addCliente: (data: ClientePayload) => Promise<Cliente>;
   updateCliente: (
     newData: ClienteUpdatePayload,
-    id: ID,
+    id: number,
   ) => Promise<Cliente | null>;
-  deleteCliente: (id: ID) => Promise<boolean>;
+  deleteCliente: (id: number) => Promise<boolean>;
 }
 
 export function useClientes(): UseClientsResult {
@@ -50,7 +49,7 @@ export function useClientes(): UseClientsResult {
     }
   };
 
-  const getSingleCliente = async (id: ID): Promise<Cliente | null> => {
+  const getSingleCliente = async (id: number): Promise<Cliente | null> => {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url);
@@ -80,7 +79,7 @@ export function useClientes(): UseClientsResult {
 
   const updateCliente = async (
     newData: ClienteUpdatePayload,
-    id: ID,
+    id: number,
   ): Promise<Cliente | null> => {
     try {
       const url = `${baseUrl}/${id}`;
@@ -97,7 +96,7 @@ export function useClientes(): UseClientsResult {
     }
   };
 
-  const deleteCliente = async (id: ID): Promise<boolean> => {
+  const deleteCliente = async (id: number): Promise<boolean> => {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url, {

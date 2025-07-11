@@ -3,7 +3,6 @@ import { computed } from 'vue';
 
 import type { Cliente } from '@/types/Cliente';
 import type { Contato } from '@/types/Contato';
-import type { ID } from '@/types/ID';
 
 import { clienteColumns, contatoColumns } from '@/utils/tableColumns';
 import { formatarData, formatarDocumento } from '@/utils/formatData';
@@ -18,7 +17,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits(['selectRow']);
 
-function handleSelectRow(id: ID) {
+function handleSelectRow(id: number) {
   emit('selectRow', id);
 }
 
