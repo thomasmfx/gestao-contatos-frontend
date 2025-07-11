@@ -33,19 +33,19 @@ function handleClick(event: MouseEvent) {
 <style scoped>
 .button {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 35px;
   padding-inline: 0.5em;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--pill-radius);
   background-color: var(--color-primary);
   color: #ffffff;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   white-space: nowrap;
-  font-size: 0.9rem;
   font-weight: 600;
+  font-size: 1.1rem;
 
   &:not(.square):not(.small) {
     width: 115px;

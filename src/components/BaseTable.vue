@@ -87,6 +87,14 @@ function inferClienteColumnValue(
 
 .th {
   padding: 0.5em;
+
+  &:first-child {
+    border-radius: 5px 0 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 5px 0 0;
+  }
 }
 
 .td {
