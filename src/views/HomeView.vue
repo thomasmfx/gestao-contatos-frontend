@@ -15,8 +15,8 @@ import { RouterLink } from 'vue-router';
 
 <style scoped>
 .main {
+  height: 90%;
   font-family: var(--font-menu);
-  min-height: 100dvh;
   display: flex;
   align-items: center;
   flex-direction: column;

@@ -15,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="main">
+  <main class="main">
     <header class="header">
       <NavBar highlighted="clientes" />
       <nav class="actions-nav">
@@ -24,12 +24,11 @@ onMounted(() => {
       </nav>
     </header>
     <BaseTable :data="clientesData" type="cliente" />
-  </div>
+  </main>
 </template>
 
 <style scoped>
 .main {
-  padding: 2.5em 3em;
   display: grid;
   gap: 4em;
 }
