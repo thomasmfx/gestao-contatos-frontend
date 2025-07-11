@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 
+import RoutesNavBar from '@/components/RoutesNavBar.vue';
 import { useClientes } from '@/composables/useClientes';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import NavBar from '@/components/NavBar.vue';
 
 const { clientesData, setClientes } = useClientes();
 
@@ -17,7 +17,7 @@ onMounted(() => {
 <template>
   <main class="main">
     <header class="header">
-      <NavBar highlighted="clientes" />
+      <RoutesNavBar highlighted="clientes" />
       <nav class="actions-nav">
         <SearchBar placeholder="Buscar cliente por Nome ou CPF" />
         <BaseButton variant="add"> Novo </BaseButton>

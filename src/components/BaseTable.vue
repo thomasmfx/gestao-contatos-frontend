@@ -98,7 +98,6 @@ function inferClienteColumnValue(
 }
 
 .td {
-  font-size: 0.9rem;
   text-align: center;
   border: 1px solid var(--color-neutral-light);
   padding: 0.5em;
