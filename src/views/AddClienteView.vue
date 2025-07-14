@@ -15,7 +15,8 @@ import BaseHeader from '@/components/BaseHeader.vue';
   width: 100%;
   min-height: 85dvh;
   display: grid;
-  align-items: center;
+  margin-top: 2em;
+  align-items: start;
   justify-content: center;
 }
 </style>

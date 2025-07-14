@@ -24,7 +24,10 @@ const cliente = ref<Cliente | null>(null);
 const props = defineProps<Props>();
 
 function handleRedirectToAddContato() {
-  router.push('/contatos/new');
+  router.push({
+    name: 'AddContatoView',
+    params: { id: props.id },
+  });
 }
 
 onMounted(async () => {
@@ -36,12 +39,8 @@ onMounted(async () => {
 <template>
   <BaseHeader previous-route="/clientes" />
   <main class="main">
-    <UpdateClienteForm
-      v-if="cliente"
-      :cliente="cliente"
-      :contatos="contatosData"
-    />
-    <div class="contatos">
+    <UpdateClienteForm v-if="cliente" :cliente="cliente" />
+    <div class="contatos" v-if="cliente">
       <nav class="nav">
         <SearchBar placeholder="Buscar cliente por Nome ou CPF" />
         <BaseButton variant="add" @click="handleRedirectToAddContato">

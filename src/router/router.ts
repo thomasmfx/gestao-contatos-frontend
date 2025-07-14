@@ -2,6 +2,7 @@ import { createMemoryHistory, createRouter } from 'vue-router';
 
 import ClienteDetailsView from '@/views/ClienteDetailsView.vue';
 import AddClienteView from '@/views/AddClienteView.vue';
+import AddContatoView from '@/views/AddContatoView.vue';
 import ClientesView from '@/views/ClientesView.vue';
 import HomeView from '@/views/HomeView.vue';
 
@@ -13,6 +14,12 @@ const routes = [
     path: '/clientes/:id',
     component: ClienteDetailsView,
     name: 'ClienteDetailsView',
+    props: true,
+  },
+  {
+    path: '/clientes/:id/new-contato',
+    component: AddContatoView,
+    name: 'AddContatoView',
     props: true,
   },
 ];

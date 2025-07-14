@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 
 import type { Cliente } from '@/types/Cliente';
-import type { Contato } from '@/types/Contato';
 
 import FormRowLegend from './FormRowLegend.vue';
 import BaseButton from './BaseButton.vue';
@@ -11,7 +10,6 @@ import BaseLabel from './BaseLabel.vue';
 
 interface Props {
   cliente: Cliente;
-  contatos: Contato[];
 }
 
 const props = defineProps<Props>();
@@ -37,12 +35,6 @@ function handleExcluirEmit(e: Event) {
       <h3 class="form-heading">Detalhes do Cliente</h3>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>
-    <div class="form-row">
-      <div class="form-field">
-        <BaseLabel htmlFor="nome">ID</BaseLabel>
-        <BaseInput :modelValue="data.id" id="nome" disabled required />
-      </div>
-    </div>
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="nome">Nome</BaseLabel>
@@ -92,14 +84,10 @@ function handleExcluirEmit(e: Event) {
       </div>
     </div>
     <div class="form-actions">
-      <BaseButton
-        @click="handleExcluirEmit"
-        variant="delete small"
-        type="button"
-      >
+      <BaseButton @click="handleExcluirEmit" variant="delete" type="button">
         Excluir
       </BaseButton>
-      <BaseButton variant="add small" type="submit"> Salvar </BaseButton>
+      <BaseButton variant="add" type="submit"> Salvar </BaseButton>
     </div>
   </form>
 </template>

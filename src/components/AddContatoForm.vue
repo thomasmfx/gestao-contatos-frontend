@@ -4,7 +4,6 @@ import { ref } from 'vue';
 import type { ContatoPayload } from '@/types/Contato';
 
 import tiposContato from '@/utils/tiposContato';
-import X from '@/assets/icons/x.svg';
 
 import FormRowLegend from './FormRowLegend.vue';
 import BaseButton from './BaseButton.vue';
@@ -36,23 +35,9 @@ function handleCancelarEmit(e: Event) {
 <template>
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
-      <h3 class="form-heading">Novo Cliente</h3>
-      <BaseButton
-        class="button-close"
-        variant="transparent"
-        isSquare
-        @click="handleCancelarEmit"
-      >
-        <img :src="X" alt="Close" />
-      </BaseButton>
+      <h3 class="form-heading">Novo Contato</h3>
     </header>
-    <FormRowLegend>Dados Pessoais</FormRowLegend>
-    <div class="form-row">
-      <div class="form-field">
-        <BaseLabel htmlFor="nome">ID Cliente</BaseLabel>
-        <BaseInput v-model="data.clienteId" id="nome" required />
-      </div>
-    </div>
+    <FormRowLegend>Dados de Contato</FormRowLegend>
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="cpf">Tipo</BaseLabel>
@@ -63,6 +48,8 @@ function handleCancelarEmit(e: Event) {
           required
         />
       </div>
+    </div>
+    <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="data-nascimento">Valor</BaseLabel>
         <BaseInput v-model="data.valor" id="data-nascimento" required />
@@ -71,7 +58,11 @@ function handleCancelarEmit(e: Event) {
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="endereco">Observação</BaseLabel>
-        <BaseInput v-model="data.observacao" id="endereco" />
+        <textarea
+          class="input textarea"
+          name="observacao"
+          id="textarea"
+        ></textarea>
       </div>
     </div>
     <div class="form-actions">
@@ -82,3 +73,11 @@ function handleCancelarEmit(e: Event) {
     </div>
   </form>
 </template>
+
+<style scoped>
+.textarea {
+  width: 100%;
+  height: 70px;
+  resize: none;
+}
+</style>

@@ -33,19 +33,3 @@ function handleInputEvent(event: Event) {
     @input="handleInputEvent"
   />
 </template>
-
-<style scoped>
-.input {
-  width: 100%;
-  height: 35px;
-  border: 2px solid var(--color-neutral);
-  border-radius: 5px;
-  outline: none;
-  padding-inline: 0.3em;
-  color: var(--color-default);
-
-  &::placeholder {
-    opacity: 0.5;
-  }
-}
-</style>

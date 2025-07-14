@@ -39,13 +39,6 @@ function handleCancelarEmit(e: Event) {
   <form class="form limited-width" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
-      <BaseButton
-        class="button-close"
-        variant="transparent"
-        isSquare
-        @click="handleCancelarEmit"
-      >
-      </BaseButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>
     <div class="form-row">
