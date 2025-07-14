@@ -11,7 +11,7 @@ import router from '@/router/router';
 const { clientesData, setClientes } = useClientes();
 
 function handleSelectCliente(id: number) {
-  router.push({ name: 'ClienteDetails', params: { id: id } });
+  router.push({ name: 'ClienteDetailsView', params: { id: id } });
 }
 
 function handleRedirectToAddCliente() {
