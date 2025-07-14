@@ -3,8 +3,6 @@ import { ref } from 'vue';
 
 import type { ClientePayload } from '@/types/Cliente';
 
-import X from '@/assets/icons/x.svg';
-
 import FormRowLegend from './FormRowLegend.vue';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
@@ -38,7 +36,7 @@ function handleCancelarEmit(e: Event) {
 </script>
 
 <template>
-  <form class="form" @submit="handleSalvarEmit">
+  <form class="form limited-width" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Novo Cliente</h3>
       <BaseButton
@@ -47,7 +45,6 @@ function handleCancelarEmit(e: Event) {
         isSquare
         @click="handleCancelarEmit"
       >
-        <img :src="X" alt="Close" />
       </BaseButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>

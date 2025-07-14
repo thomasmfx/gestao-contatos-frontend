@@ -4,13 +4,10 @@ import { ref } from 'vue';
 import type { Cliente } from '@/types/Cliente';
 import type { Contato } from '@/types/Contato';
 
-import X from '@/assets/icons/x.svg';
-
 import FormRowLegend from './FormRowLegend.vue';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import BaseLabel from './BaseLabel.vue';
-import BaseTable from './BaseTable.vue';
 
 interface Props {
   cliente: Cliente;
@@ -21,7 +18,7 @@ const props = defineProps<Props>();
 
 const data = ref<Cliente>(props.cliente);
 
-const emit = defineEmits(['salvar', 'excluir', 'cancelar']);
+const emit = defineEmits(['salvar', 'excluir']);
 
 function handleSalvarEmit(e: Event) {
   e.preventDefault();
@@ -32,25 +29,12 @@ function handleExcluirEmit(e: Event) {
   e.preventDefault();
   emit('excluir', data.value.id);
 }
-
-function handleCancelarEmit(e: Event) {
-  e.preventDefault();
-  emit('cancelar');
-}
 </script>
 
 <template>
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Cliente</h3>
-      <BaseButton
-        class="button-close"
-        variant="transparent"
-        isSquare
-        @click="handleCancelarEmit"
-      >
-        <img :src="X" alt="Close" />
-      </BaseButton>
     </header>
     <FormRowLegend>Dados Pessoais</FormRowLegend>
     <div class="form-row">
@@ -107,10 +91,6 @@ function handleCancelarEmit(e: Event) {
         <BaseInput v-model="data.endereco.cep" id="estado" />
       </div>
     </div>
-    <FormRowLegend>Contatos</FormRowLegend>
-    <div class="form-row">
-      <BaseTable type="contato" :data="props.contatos" size="small" />
-    </div>
     <div class="form-actions">
       <BaseButton
         @click="handleExcluirEmit"
@@ -119,7 +99,7 @@ function handleCancelarEmit(e: Event) {
       >
         Excluir
       </BaseButton>
-      <BaseButton variant="add" type="submit"> Salvar </BaseButton>
+      <BaseButton variant="add small" type="submit"> Salvar </BaseButton>
     </div>
   </form>
 </template>

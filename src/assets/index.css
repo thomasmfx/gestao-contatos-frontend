@@ -75,14 +75,20 @@ select {
 }
 
 #app {
-  display: grid;
   min-height: 100dvh;
   color: var(--color-default);
   font-family: var(--font);
+  padding: 0 4em 4em 4em;
 }
 
-.main {
-  padding: 2.5em 3em;
+@media (min-width: 1400px) {
+  #app {
+    width: 1400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 h3 {
@@ -96,7 +102,6 @@ h4 {
 /* || Forms */
 
 .form {
-  width: 600px;
   display: grid;
   gap: 1em;
   border: 2px solid var(--color-neutral);
@@ -104,12 +109,16 @@ h4 {
   padding-bottom: 1.5em;
   border-radius: 5px;
   background-color: white;
+
+  &.limited-width {
+    width: 600px;
+  }
 }
 
 .form-header {
   display: flex;
   background-color: var(--color-primary);
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: #ffffff;
   padding: 0.3em;
@@ -118,6 +127,11 @@ h4 {
   border-top-right-radius: 5px;
   width: calc(100% + 4px);
   transform: translateX(-2px);
+}
+
+.form-heading {
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .form-row {

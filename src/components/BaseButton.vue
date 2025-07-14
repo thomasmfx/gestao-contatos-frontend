@@ -4,17 +4,17 @@ import { computed } from 'vue';
 interface Props {
   type?: 'button' | 'submit' | 'reset';
   variant?: string;
-  isSquare?: boolean;
+  isCircle?: boolean;
 }
 
 const {
   type = 'button',
   variant = '',
-  isSquare = false,
+  isCircle = false,
 } = defineProps<Props>();
 
 const buttonClasses = computed(() =>
-  ['button', variant, isSquare ? 'square' : ''].filter(Boolean).join(' '),
+  ['button', variant, isCircle ? 'circle' : ''].filter(Boolean).join(' '),
 );
 
 const emit = defineEmits(['click']);
@@ -45,10 +45,10 @@ function handleClick(event: MouseEvent) {
   transition: all 0.1s ease-in-out;
   white-space: nowrap;
   font-weight: 600;
-  font-size: 1.1rem;
 
-  &:not(.square):not(.small) {
+  &:not(.circle):not(.small) {
     width: 115px;
+    font-size: 1.1rem;
   }
 }
 
@@ -56,7 +56,7 @@ function handleClick(event: MouseEvent) {
   background-color: var(--color-primary-hover);
 }
 
-.square {
+.circle {
   height: 35px;
   min-width: 35px;
   padding-inline: 0;

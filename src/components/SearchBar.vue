@@ -31,7 +31,7 @@ function handleSubmit(e: unknown) {
     <BaseButton
       class="button-search"
       type="submit"
-      isSquare
+      isCircle
       @click="handleSubmit"
     >
       <img :src="SearchIcon" alt="Search" />
