@@ -4,8 +4,8 @@ import { ref } from 'vue';
 import type { Contato } from '@/types/Contato';
 
 import tiposContato from '@/utils/tiposContato';
-import X from '@/assets/icons/x.svg';
 
+import BaseTextarea from './BaseTextarea.vue';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
 import BaseInput from './BaseInput.vue';
@@ -41,27 +41,7 @@ function handleCancelarEmit(e: Event) {
   <form class="form" @submit="handleSalvarEmit">
     <header class="form-header">
       <h3 class="form-heading">Detalhes do Contato</h3>
-      <BaseButton
-        @click="handleCancelarEmit"
-        variant="transparent"
-        isSquare
-        class="button-close"
-      >
-        <img :src="X" alt="Close" />
-      </BaseButton>
     </header>
-    <div class="form-row">
-      <div class="form-field">
-        <BaseLabel htmlFor="nome">ID</BaseLabel>
-        <BaseInput :modelValue="data.id" id="nome" disabled required />
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-field">
-        <BaseLabel htmlFor="nome">ID Cliente</BaseLabel>
-        <BaseInput v-model="data.clienteId" id="nome" required />
-      </div>
-    </div>
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="cpf">Tipo</BaseLabel>
@@ -72,6 +52,8 @@ function handleCancelarEmit(e: Event) {
           required
         />
       </div>
+    </div>
+    <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="data-nascimento">Valor</BaseLabel>
         <BaseInput v-model="data.valor" id="data-nascimento" required />
@@ -80,10 +62,18 @@ function handleCancelarEmit(e: Event) {
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="endereco">Observação</BaseLabel>
-        <BaseInput v-model="data.observacao" id="endereco" />
+        <BaseTextarea v-model="data.observacao" />
       </div>
     </div>
     <div class="form-actions">
+      <BaseButton
+        class="cancel-button"
+        variant="delete-alternative small"
+        type="button"
+        @click="handleCancelarEmit"
+      >
+        Cancelar
+      </BaseButton>
       <BaseButton
         @click="handleExcluirEmit"
         variant="delete small"
@@ -95,3 +85,16 @@ function handleCancelarEmit(e: Event) {
     </div>
   </form>
 </template>
+
+<style scoped>
+.form-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr min-content min-content;
+  justify-content: end;
+}
+
+.cancel-button {
+  justify-self: start;
+}
+</style>

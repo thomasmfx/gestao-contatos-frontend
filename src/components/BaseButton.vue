@@ -94,4 +94,15 @@ function handleClick(event: MouseEvent) {
 .delete:hover {
   background-color: var(--color-delete-hover);
 }
+
+.delete-alternative {
+  background-color: transparent;
+  color: var(--color-delete);
+  border: 2px solid var(--color-delete);
+}
+.delete-alternative:hover {
+  background-color: transparent;
+  color: var(--color-delete-hover);
+  border: 2px solid var(--color-delete-hover);
+}
 </style>

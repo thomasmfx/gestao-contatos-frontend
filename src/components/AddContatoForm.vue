@@ -6,6 +6,7 @@ import type { ContatoPayload } from '@/types/Contato';
 import tiposContato from '@/utils/tiposContato';
 
 import FormRowLegend from './FormRowLegend.vue';
+import BaseTextarea from './BaseTextarea.vue';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
 import BaseInput from './BaseInput.vue';
@@ -58,26 +59,14 @@ function handleCancelarEmit(e: Event) {
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="endereco">Observação</BaseLabel>
-        <textarea
-          class="input textarea"
-          name="observacao"
-          id="textarea"
-        ></textarea>
+        <BaseTextarea v-model="data.observacao" />
       </div>
     </div>
     <div class="form-actions">
-      <BaseButton @click="handleCancelarEmit" variant="delete">
+      <BaseButton @click="handleCancelarEmit" variant="delete small">
         Cancelar
       </BaseButton>
-      <BaseButton variant="add" type="submit"> Salvar </BaseButton>
+      <BaseButton variant="add small" type="submit"> Salvar </BaseButton>
     </div>
   </form>
 </template>
-
-<style scoped>
-.textarea {
-  width: 100%;
-  height: 70px;
-  resize: none;
-}
-</style>
