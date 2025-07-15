@@ -12,11 +12,20 @@ interface Props {
 
 const { type = 'text', placeholder = '' } = defineProps<Props>();
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'debounce']);
+
+let debounceTimer: number;
 
 function handleInputEvent(event: Event) {
   const target = event.target as HTMLInputElement;
+
   emit('update:modelValue', target.value);
+
+  clearTimeout(debounceTimer);
+
+  debounceTimer = setTimeout(() => {
+    emit('debounce', target.value);
+  }, 1000);
 }
 </script>
 

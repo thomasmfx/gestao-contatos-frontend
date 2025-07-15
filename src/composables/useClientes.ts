@@ -17,8 +17,8 @@ interface UseClientsResult {
   getSingleCliente: (id: number) => Promise<Cliente | null>;
   addCliente: (data: ClientePayload) => Promise<Cliente>;
   updateCliente: (
-    newData: ClienteUpdatePayload,
     id: number,
+    newData: ClienteUpdatePayload,
   ) => Promise<Cliente | null>;
   deleteCliente: (id: number) => Promise<boolean>;
 }
@@ -78,8 +78,8 @@ export function useClientes(): UseClientsResult {
   };
 
   const updateCliente = async (
-    newData: ClienteUpdatePayload,
     id: number,
+    newData: ClienteUpdatePayload,
   ): Promise<Cliente | null> => {
     try {
       const url = `${baseUrl}/${id}`;

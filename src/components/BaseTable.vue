@@ -8,6 +8,7 @@ import { clienteColumns, contatoColumns } from '@/utils/tableColumns';
 import { formatarData, formatarDocumento } from '@/utils/formatData';
 import { getEnderecoRuaAndNumero } from '@/utils/formatEndereco';
 
+// TODO: remover colunas de ID
 interface Props {
   type: 'cliente' | 'contato';
   data: (Cliente | Contato)[];

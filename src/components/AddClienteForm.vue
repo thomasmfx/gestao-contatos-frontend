@@ -1,12 +1,17 @@
 <script lang="ts" setup>
+import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 
 import type { ClientePayload } from '@/types/Cliente';
+
+import useEndereco from '@/composables/useEndereco';
+import useNotify from '@/composables/useNotify';
 
 import FormRowLegend from './FormRowLegend.vue';
 import BaseButton from './BaseButton.vue';
 import BaseInput from './BaseInput.vue';
 import BaseLabel from './BaseLabel.vue';
+import 'vue3-toastify/dist/index.css';
 
 const clienteInitialData: ClientePayload = {
   nome: '',
@@ -23,6 +28,53 @@ const clienteInitialData: ClientePayload = {
 
 const data = ref<ClientePayload>({ ...clienteInitialData });
 const emit = defineEmits(['salvar', 'cancelar']);
+const validatedCep = ref<string>('');
+const areInputsDisabled = ref<boolean>(false);
+
+const getEndereco = useEndereco();
+const notify = useNotify();
+
+async function handleValidarCep(valueOnDebounce: string) {
+  if (valueOnDebounce === validatedCep.value) return;
+
+  if (!data.value.endereco.cep) {
+    data.value.endereco.rua = '';
+    data.value.endereco.estado = '';
+    data.value.endereco.cidade = '';
+    validatedCep.value = '';
+    notify('warning', 'CEP é obrigatório');
+    return;
+  }
+
+  const cepValido = /^[0-9]{5}-?[0-9]{3}$/.test(data.value.endereco.cep);
+  if (!cepValido) {
+    notify('warning', 'CEP inválido');
+    return;
+  }
+
+  areInputsDisabled.value = true;
+  const endereco = await toast.promise(
+    getEndereco(data.value.endereco.cep),
+    {
+      pending: 'Verificando CEP...',
+      success: 'CEP encontrado',
+      error: 'CEP não encontrado',
+    },
+    {
+      autoClose: 2000,
+      dangerouslyHTMLString: true,
+      hideProgressBar: true,
+      position: 'top-center',
+    },
+  );
+
+  data.value.endereco.rua = endereco.rua;
+  data.value.endereco.estado = endereco.estado;
+  data.value.endereco.cidade = endereco.cidade;
+
+  validatedCep.value = data.value.endereco.cep;
+  areInputsDisabled.value = false;
+}
 
 function handleSalvarEmit(e: Event) {
   e.preventDefault();
@@ -65,28 +117,49 @@ function handleCancelarEmit(e: Event) {
     <FormRowLegend>Informações de endereço</FormRowLegend>
     <div class="form-row">
       <div class="form-field">
-        <BaseLabel htmlFor="endereco">Rua</BaseLabel>
-        <BaseInput v-model="data.endereco.rua" id="endereco" />
+        <BaseLabel htmlFor="cep">CEP</BaseLabel>
+        <BaseInput
+          v-model="data.endereco.cep!"
+          id="cep"
+          @debounce="handleValidarCep"
+          :disabled="areInputsDisabled"
+        />
+      </div>
+      <div class="form-field">
+        <BaseLabel htmlFor="estado">Estado</BaseLabel>
+        <BaseInput
+          v-model="data.endereco.estado!"
+          id="estado"
+          :disabled="areInputsDisabled"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <BaseLabel htmlFor="rua">Rua</BaseLabel>
+        <BaseInput
+          v-model="data.endereco.rua"
+          id="rua"
+          :disabled="areInputsDisabled"
+        />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
         <BaseLabel htmlFor="endereco">Numero</BaseLabel>
-        <BaseInput v-model="data.endereco.numero!" id="endereco" />
+        <BaseInput
+          v-model="data.endereco.numero!"
+          id="endereco"
+          :disabled="areInputsDisabled"
+        />
       </div>
       <div class="form-field">
         <BaseLabel htmlFor="cidade">Cidade</BaseLabel>
-        <BaseInput v-model="data.endereco.cidade!" id="cidade" />
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-field">
-        <BaseLabel htmlFor="estado">Estado</BaseLabel>
-        <BaseInput v-model="data.endereco.estado!" id="estado" />
-      </div>
-      <div class="form-field">
-        <BaseLabel htmlFor="estado">CEP</BaseLabel>
-        <BaseInput v-model="data.endereco.cep!" id="estado" />
+        <BaseInput
+          v-model="data.endereco.cidade!"
+          id="cidade"
+          :disabled="areInputsDisabled"
+        />
       </div>
     </div>
     <div class="form-actions">

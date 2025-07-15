@@ -6,9 +6,12 @@ import BaseButton from '@/components/BaseButton.vue';
 import BaseHeader from '@/components/BaseHeader.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import SearchBar from '@/components/SearchBar.vue';
+import useNotify from '@/composables/useNotify';
 import router from '@/router/router';
 
 const { clientesData, setClientes } = useClientes();
+
+const notify = useNotify();
 
 function handleSelectCliente(id: number) {
   router.push({ name: 'ClienteDetailsView', params: { id: id } });
@@ -16,6 +19,17 @@ function handleSelectCliente(id: number) {
 
 function handleRedirectToAddCliente() {
   router.push('/clientes/new');
+}
+
+function handleSearchCliente(value: string) {
+  setClientes(value).then(() => {
+    if (!value) return;
+    if (clientesData.value.length === 0) {
+      notify('info', 'Nenhum cliente encontrado');
+      return;
+    }
+    notify('success', 'Clientes filtrados com sucesso!');
+  });
 }
 
 onMounted(() => {
@@ -26,7 +40,10 @@ onMounted(() => {
 <template>
   <BaseHeader previous-route="/" />
   <nav class="nav">
-    <SearchBar placeholder="Buscar cliente por Nome ou CPF" />
+    <SearchBar
+      placeholder="Buscar cliente por Nome ou CPF"
+      @search="handleSearchCliente"
+    />
     <BaseButton variant="add" @click="handleRedirectToAddCliente">
       Novo
     </BaseButton>

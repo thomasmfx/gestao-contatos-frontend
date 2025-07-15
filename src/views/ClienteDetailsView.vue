@@ -49,7 +49,7 @@ function handleDeleteCliente(id: number) {
 }
 
 function handleUpdateCliente(id: number, newData: ClienteUpdatePayload) {
-  updateCliente(newData, id).then(() => {
+  updateCliente(id, newData).then(() => {
     notify('success', 'Cliente atualizado com sucesso!');
   });
 }
