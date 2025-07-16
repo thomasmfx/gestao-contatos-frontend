@@ -8,7 +8,6 @@ import { clienteColumns, contatoColumns } from '@/utils/tableColumns';
 import { formatarData, formatarDocumento } from '@/utils/formatData';
 import { getEnderecoRuaAndNumero } from '@/utils/formatEndereco';
 
-// TODO: remover colunas de ID
 interface Props {
   type: 'cliente' | 'contato';
   data: (Cliente | Contato)[];
@@ -25,8 +24,6 @@ function handleSelectRow(id: number) {
 const columns = computed(() =>
   props.type === 'cliente' ? clienteColumns : contatoColumns,
 );
-
-const isInteractive = computed(() => !!emit);
 
 function inferClienteColumnValue(
   cliente: Cliente,
@@ -54,13 +51,19 @@ function inferClienteColumnValue(
     </thead>
     <tbody class="tbody">
       <tr
-        class="tr"
-        @click="isInteractive && handleSelectRow(row.id)"
         v-for="row in props.data"
+        class="tr"
         :key="row.id ?? null"
-        :data-id="isInteractive && row.id"
+        :data-id="row.id"
+        @click="handleSelectRow(row.id)"
       >
-        <td class="td" v-for="[key, value] in Object.entries(row)" :key="key">
+        <td
+          class="td"
+          v-for="[key, value] in Object.entries(row).filter(
+            ([key]) => !['id', 'clienteId'].includes(key),
+          )"
+          :key="key"
+        >
           {{
             type === 'cliente'
               ? inferClienteColumnValue(row as Cliente, key, value)
