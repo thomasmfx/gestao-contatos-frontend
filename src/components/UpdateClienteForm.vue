@@ -45,27 +45,29 @@ async function handleValidarCep(valueOnDebounce: string) {
   }
 
   areInputsDisabled.value = true;
-  const endereco = await toast.promise(
-    getEndereco(data.value.endereco.cep),
-    {
-      pending: 'Verificando CEP...',
-      success: 'CEP encontrado',
-      error: 'CEP não encontrado',
-    },
-    {
-      autoClose: 2000,
-      dangerouslyHTMLString: true,
-      hideProgressBar: true,
-      position: 'top-center',
-    },
-  );
+  try {
+    const endereco = await toast.promise(
+      getEndereco(data.value.endereco.cep),
+      {
+        pending: 'Verificando CEP...',
+        success: 'CEP encontrado',
+        error: 'CEP não encontrado',
+      },
+      {
+        autoClose: 2000,
+        dangerouslyHTMLString: true,
+        hideProgressBar: true,
+        position: 'top-center',
+      },
+    );
 
-  data.value.endereco.rua = endereco.rua;
-  data.value.endereco.estado = endereco.estado;
-  data.value.endereco.cidade = endereco.cidade;
-
-  validatedCep.value = data.value.endereco.cep;
-  areInputsDisabled.value = false;
+    data.value.endereco.rua = endereco.rua;
+    data.value.endereco.estado = endereco.estado;
+    data.value.endereco.cidade = endereco.cidade;
+  } finally {
+    areInputsDisabled.value = false;
+    validatedCep.value = data.value.endereco.cep;
+  }
 }
 
 function handleSalvarEmit(e: Event) {
