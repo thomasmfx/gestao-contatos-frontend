@@ -54,11 +54,11 @@ function handleUpdateCliente(id: number, newData: ClienteUpdatePayload) {
   });
 }
 
-function handleSearchContato(value: number) {
-  setContatos(value)
+function handleSearchContato(value: string) {
+  setContatos(props.id, value)
     .then(() => {
       if (!contatosData.value.length) {
-        notify('info', 'Nenhum contato encontrado para este cliente.');
+        notify('info', 'Nenhum contato encontrado com este critério de busca.');
       }
     })
     .catch((error) => {
@@ -142,7 +142,7 @@ onMounted(async () => {
       />
       <nav class="nav">
         <SearchBar
-          placeholder="Buscar contato por Cliente ID"
+          placeholder="Buscar contato por Tipo, Valor ou Observação"
           @search="handleSearchContato"
         />
         <BaseButton

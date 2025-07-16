@@ -13,7 +13,10 @@ interface UseContatosResult {
   contatosData: Ref<Contato[] | []>;
   contatosLoading: Ref<boolean>;
   contatosError: Ref<string | null>;
-  setContatos: (clienteId?: number) => Promise<Contato[] | null>;
+  setContatos: (
+    clienteId?: number,
+    search?: string,
+  ) => Promise<Contato[] | null>;
   getContatos: (clienteId: number) => Promise<Contato[] | null>;
   getSingleContato: (id: number) => Promise<Contato | null>;
   addContato: (data: ContatoPayload) => Promise<Contato>;
@@ -31,17 +34,23 @@ export function useContatos(): UseContatosResult {
 
   const baseUrl = `${API_URL}/contatos`;
 
-  const setContatos = async (clienteId?: number): Promise<Contato[] | null> => {
+  const setContatos = async (
+    clienteId?: number,
+    search?: string,
+  ): Promise<Contato[] | null> => {
     contatosLoading.value = true;
     try {
-      const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
+      let url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
+      if (search) url += `&search=${search}`;
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch contacts');
+      if (!response.ok) throw new Error('Erro ao buscar contatos');
       const data: Contato[] = await response.json();
       contatosData.value = data;
       return data;
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       return null;
     } finally {
       contatosLoading.value = false;
@@ -53,11 +62,13 @@ export function useContatos(): UseContatosResult {
     try {
       const url = clienteId ? `${baseUrl}?clienteid=${clienteId}` : baseUrl;
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch contacts');
+      if (!response.ok) throw new Error('Erro ao buscar contatos');
       const data: Contato[] = await response.json();
       return data;
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       return null;
     } finally {
       contatosLoading.value = false;
@@ -68,10 +79,12 @@ export function useContatos(): UseContatosResult {
     try {
       const url = `${baseUrl}/${id}`;
       const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch contact');
+      if (!response.ok) throw new Error('Erro ao buscar contato');
       return await response.json();
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       return null;
     }
   };
@@ -84,10 +97,12 @@ export function useContatos(): UseContatosResult {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Failed to add contact');
+      if (!response.ok) throw new Error('Erro ao adicionar contato');
       return await response.json();
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       throw error;
     }
   };
@@ -103,10 +118,12 @@ export function useContatos(): UseContatosResult {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newData),
       });
-      if (!response.ok) throw new Error('Failed to update contact');
+      if (!response.ok) throw new Error('Erro ao atualizar contato');
       return await response.json();
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       return null;
     }
   };
@@ -117,10 +134,12 @@ export function useContatos(): UseContatosResult {
       const response = await fetch(url, {
         method: 'DELETE',
       });
-      if (!response.ok) throw new Error('Failed to delete contact');
+      if (!response.ok) throw new Error('Erro ao excluir contato');
       return true;
     } catch (error) {
-      contatosError.value = isError(error) ? error.message : 'Unknown error';
+      contatosError.value = isError(error)
+        ? error.message
+        : 'Erro desconhecido';
       return false;
     }
   };
