@@ -28,12 +28,7 @@ function handleSubmit(e: unknown) {
       class="searchbar-input"
       :placeholder="placeholder"
     />
-    <BaseButton
-      class="button-search"
-      type="submit"
-      isCircle
-      @click="handleSubmit"
-    >
+    <BaseButton class="button-search" type="submit" isCircle>
       <img :src="SearchIcon" alt="Search" />
     </BaseButton>
   </form>
