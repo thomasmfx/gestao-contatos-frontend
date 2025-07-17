@@ -44,7 +44,7 @@ function handleCancelarEmit(e: Event) {
     </header>
     <div class="form-row">
       <div class="form-field">
-        <BaseLabel htmlFor="cpf">Tipo</BaseLabel>
+        <BaseLabel htmlFor="tipo">Tipo</BaseLabel>
         <BaseSelect
           v-model="data.tipo"
           :options="[...tiposContato]"
@@ -55,30 +55,25 @@ function handleCancelarEmit(e: Event) {
     </div>
     <div class="form-row">
       <div class="form-field">
-        <BaseLabel htmlFor="data-nascimento">Valor</BaseLabel>
-        <BaseInput v-model="data.valor" id="data-nascimento" required />
+        <BaseLabel htmlFor="valor">Valor</BaseLabel>
+        <BaseInput v-model="data.valor" id="valor" required />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field">
-        <BaseLabel htmlFor="endereco">Observação</BaseLabel>
-        <BaseTextarea v-model="data.observacao" />
+        <BaseLabel htmlFor="observacao">Observação</BaseLabel>
+        <BaseTextarea v-model="data.observacao" id="observacao" />
       </div>
     </div>
     <div class="form-actions">
       <BaseButton
         class="cancel-button"
         variant="delete-alternative small"
-        type="button"
         @click="handleCancelarEmit"
       >
         Cancelar
       </BaseButton>
-      <BaseButton
-        @click="handleExcluirEmit"
-        variant="delete small"
-        type="button"
-      >
+      <BaseButton @click="handleExcluirEmit" variant="delete small">
         Excluir
       </BaseButton>
       <BaseButton variant="add small" type="submit"> Salvar </BaseButton>
