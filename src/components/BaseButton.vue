@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 interface Props {
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'submit' | 'reset';
   variant?: string;
   isCircle?: boolean;
 }
@@ -25,7 +25,7 @@ function handleClick(event: MouseEvent) {
 </script>
 
 <template>
-  <button :type="type" :class="buttonClasses" @click="handleClick">
+  <button :type="type ?? 'button'" :class="buttonClasses" @click="handleClick">
     <slot />
   </button>
 </template>
