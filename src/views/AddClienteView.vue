@@ -5,6 +5,7 @@ import AddClienteForm from '@/components/AddClienteForm.vue';
 import { useClientes } from '@/composables/useClientes';
 import BaseHeader from '@/components/BaseHeader.vue';
 import useNotify from '@/composables/useNotify';
+import { ApiError } from '@/utils/errors';
 import router from '@/router/router';
 
 const { addCliente } = useClientes();
@@ -15,8 +16,10 @@ function handleSubmit(data: ClientePayload) {
     .then(() => {
       router.push('/clientes');
     })
-    .catch(() => {
-      notify('error', 'Erro ao adicionar cliente');
+    .catch((error: unknown) => {
+      if (error instanceof ApiError) {
+        notify('error', error.message);
+      }
     });
 }
 

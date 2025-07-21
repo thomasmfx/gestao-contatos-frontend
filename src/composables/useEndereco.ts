@@ -1,6 +1,6 @@
 import type { Endereco } from '@/types/Endereco';
 
-import { ApiError } from '@/utils/errors';
+import throwIfApiError from '@/utils/throwIfApiError';
 import API_URL from '@/utils/API';
 
 function useEndereco() {
@@ -10,13 +10,9 @@ function useEndereco() {
     const url = `${baseUrl}/${cep}`;
     const response = await fetch(url);
 
-    if (!response.ok) {
-      const errorBody = await response.json();
-      throw new ApiError(errorBody.message, response.status);
-    }
+    await throwIfApiError(response);
 
-    const data: Endereco = await response.json();
-    return data;
+    return await response.json();
   };
 
   return getEndereco;
