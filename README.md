@@ -6,6 +6,7 @@ Este repositório contém a implementação frontend do sistema de gestão de co
 
 - TypeScript
 - Vue
+- Cypress
 
 ## Estrutura do Projeto
 
@@ -15,6 +16,7 @@ Este repositório contém a implementação frontend do sistema de gestão de co
 │   ├── assets/
 │   ├── components/
 │   ├── composables/
+│   ├── router/
 │   ├── types/
 │   ├── utils/
 │   ├── views/
