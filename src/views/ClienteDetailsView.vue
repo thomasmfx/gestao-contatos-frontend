@@ -18,6 +18,7 @@ import BaseHeader from '@/components/BaseHeader.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import useNotify from '@/composables/useNotify';
+import { ApiError } from '@/utils/errors';
 import router from '@/router/router';
 
 const { getSingleCliente, updateCliente, deleteCliente } = useClientes();
@@ -49,9 +50,15 @@ function handleDeleteCliente(id: number) {
 }
 
 function handleUpdateCliente(id: number, newData: ClienteUpdatePayload) {
-  updateCliente(id, newData).then(() => {
-    notify('success', 'Cliente atualizado com sucesso!');
-  });
+  updateCliente(id, newData)
+    .then(() => {
+      notify('success', 'Cliente atualizado com sucesso!');
+    })
+    .catch((error: unknown) => {
+      if (error instanceof ApiError) {
+        notify('error', error.message);
+      }
+    });
 }
 
 function handleSearchContato(value: string) {
