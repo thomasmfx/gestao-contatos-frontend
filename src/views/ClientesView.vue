@@ -26,9 +26,7 @@ function handleSearchCliente(value: string) {
     if (!value) return;
     if (clientesData.value.length === 0) {
       notify('info', 'Nenhum cliente encontrado');
-      return;
     }
-    notify('success', 'Clientes filtrados com sucesso!');
   });
 }
 
