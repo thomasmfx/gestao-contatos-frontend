@@ -44,6 +44,14 @@ Para estabelecer a conexão com o backend, basta criar um arquivo `.env` na raí
 VITE_API_URL=http://localhost:7772
 ```
 
+## Execução dos testes
+
+Para executar os testes de interface escritos neste repositório, apenas certifique-se de estar dentro da pasta raíz do projeto, e então execute na sua linha de comando:
+
+```
+npm run test
+```
+
 ## Integração com o Backend
 
 Este frontend está configurado para se comunicar com a API RESTful disponível no repositório [gestao-contatos-backend](https://github.com/thomasmfx/gestao-contatos-backend).
