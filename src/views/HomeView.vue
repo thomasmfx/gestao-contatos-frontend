@@ -1,13 +1,19 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router';
+
+import Image from '@/assets/images/Contact us-rafiki.svg';
+import BaseHeader from '@/components/BaseHeader.vue';
 </script>
 
 <template>
+  <BaseHeader route="/" />
   <main class="main">
-    <h1 class="title">Comércio S.A.</h1>
-    <h2 class="subtitle">Gestão de Contatos</h2>
-    <nav class="nav">
-      <RouterLink to="/clientes">
+    <section class="hero">
+      <h1 class="title">Gestão de Contatos</h1>
+      <h2 class="subtitle">
+        Organize e gerencie seus clientes e contatos de forma eficiente
+      </h2>
+      <RouterLink to="/clientes" class="hero-btn">
         Iniciar
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,39 +31,46 @@ import { RouterLink } from 'vue-router';
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </RouterLink>
-    </nav>
+    </section>
+    <img :src="Image" class="img" alt="Contact" />
   </main>
 </template>
 
 <style scoped>
 .main {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
+  flex: 0.7;
   font-family: var(--font-menu);
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
+  padding-inline: 4em;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 4rem;
+  line-height: 1.2;
 }
 
 .subtitle {
+  font-size: 1.5rem;
   font-weight: 500;
   opacity: 80%;
+  max-width: 30ch;
 }
 
-.nav {
-  margin-top: 2em;
-  display: flex;
-  gap: 1em;
+.img {
+  width: 600px;
+  height: 600px;
 }
 
-a {
+.hero-btn {
+  margin-top: 1em;
   display: flex;
   align-items: center;
   justify-content: center;

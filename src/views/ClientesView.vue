@@ -36,17 +36,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <BaseHeader previous-route="/" />
-  <nav class="nav">
-    <SearchBar
-      placeholder="Buscar cliente por Nome ou CPF"
-      @search="handleSearchCliente"
-    />
-    <BaseButton variant="add" @click="handleRedirectToAddCliente">
-      Novo
-    </BaseButton>
-  </nav>
+  <BaseHeader route="/clientes" />
   <main class="main">
+    <nav class="nav">
+      <SearchBar
+        placeholder="Buscar cliente por Nome ou CPF"
+        @search="handleSearchCliente"
+      />
+      <BaseButton variant="add" @click="handleRedirectToAddCliente">
+        Novo
+      </BaseButton>
+    </nav>
     <BaseTable
       :data="clientesData"
       type="cliente"
@@ -58,7 +58,8 @@ onMounted(() => {
 <style scoped>
 .main {
   display: grid;
-  gap: 4em;
+  gap: 2em;
+  margin: 2em;
 }
 
 .nav {
@@ -69,6 +70,15 @@ onMounted(() => {
   align-items: center;
   height: 64px;
   background-color: var(--color-neutral);
-  margin: 2em 0;
+}
+
+@media (min-width: 1400px) {
+  .main {
+    justify-content: center;
+  }
+
+  .nav {
+    width: 1400px;
+  }
 }
 </style>

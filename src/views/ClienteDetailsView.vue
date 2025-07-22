@@ -125,7 +125,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <BaseHeader previous-route="/clientes" />
+  <BaseHeader route="/clientes" />
   <main class="main">
     <UpdateClienteForm
       v-if="cliente"
@@ -175,10 +175,9 @@ onMounted(async () => {
 .main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr;
   align-items: start;
   gap: 2em;
-  margin-top: 2em;
+  margin: 2em;
 }
 
 .nav {
@@ -199,5 +198,12 @@ onMounted(async () => {
 .table-fallback {
   justify-self: center;
   opacity: 0.8;
+}
+
+@media (min-width: 1400px) {
+  .main {
+    width: 1400px;
+    margin: 2em auto;
+  }
 }
 </style>

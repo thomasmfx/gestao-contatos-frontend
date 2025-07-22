@@ -29,7 +29,7 @@ function handleGoBack() {
 </script>
 
 <template>
-  <BaseHeader previous-route="/clientes" />
+  <BaseHeader route="/clientes/new" />
   <main class="main">
     <AddClienteForm @salvar="handleSubmit" @cancelar="handleGoBack" />
   </main>
@@ -40,7 +40,7 @@ function handleGoBack() {
   width: 100%;
   min-height: 85dvh;
   display: grid;
-  margin-top: 2em;
+  margin-top: 4em;
   align-items: start;
   justify-content: center;
 }
