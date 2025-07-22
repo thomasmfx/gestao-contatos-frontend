@@ -23,8 +23,11 @@ import { mount } from 'cypress/vue';
 // Alternatively, can be defined in cypress/support/component.d.ts
 // with a <reference path="./component" /> at the top of your spec.
 declare global {
-  interface Chainable {
-    mount: typeof mount;
+  // eslint-disable-next-line
+  namespace Cypress {
+    interface Chainable {
+      mount: typeof import('cypress/vue').mount;
+    }
   }
 }
 

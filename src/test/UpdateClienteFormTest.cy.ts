@@ -1,4 +1,6 @@
-import UpdateClienteForm from './UpdateClienteForm.vue';
+/// <reference types="cypress" />
+import '../../cypress/support/component';
+import UpdateClienteForm from '../components/UpdateClienteForm.vue';
 import '@/assets/index.css';
 
 describe('<UpdateClienteForm />', () => {

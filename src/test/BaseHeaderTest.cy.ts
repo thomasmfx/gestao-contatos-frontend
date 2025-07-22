@@ -1,8 +1,11 @@
+/// <reference types="cypress" />
+import '../../cypress/support/component';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 import '@/assets/index.css';
 
-import BaseHeader from './BaseHeader.vue';
+import BaseHeader from '../components/BaseHeader.vue';
 
 const router = createRouter({
   history: createWebHistory(),

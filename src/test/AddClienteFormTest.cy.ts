@@ -1,5 +1,9 @@
-import AddClienteForm from './AddClienteForm.vue';
+/// <reference types="cypress" />
+import '../../cypress/support/component';
+
 import '@/assets/index.css';
+
+import AddClienteForm from '../components/AddClienteForm.vue';
 
 describe('<AddClienteForm />', () => {
   beforeEach(() => {

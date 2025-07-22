@@ -1,4 +1,6 @@
-import BaseButton from './BaseButton.vue';
+/// <reference types="cypress" />
+import '../../cypress/support/component';
+import BaseButton from '../components/BaseButton.vue';
 import '@/assets/index.css';
 
 describe('<BaseButton />', () => {

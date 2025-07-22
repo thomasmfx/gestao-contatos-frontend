@@ -1,4 +1,6 @@
-import UpdateContatoForm from './UpdateContatoForm.vue';
+/// <reference types="cypress" />
+import '../../cypress/support/component';
+import UpdateContatoForm from '../components/UpdateContatoForm.vue';
 import '@/assets/index.css';
 
 describe('<UpdateContatoForm />', () => {
