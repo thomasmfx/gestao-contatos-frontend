@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 
 import ClienteDetailsView from '@/views/ClienteDetailsView.vue';
 import AddClienteView from '@/views/AddClienteView.vue';
@@ -18,7 +18,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
 

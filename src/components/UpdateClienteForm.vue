@@ -157,7 +157,7 @@ function handleExcluirEmit(e: Event) {
       </div>
     </div>
     <div class="form-actions">
-      <BaseButton @click="handleExcluirEmit" variant="delete" type="button">
+      <BaseButton @click="handleExcluirEmit" variant="delete">
         Excluir
       </BaseButton>
       <BaseButton variant="add" type="submit"> Salvar </BaseButton>
